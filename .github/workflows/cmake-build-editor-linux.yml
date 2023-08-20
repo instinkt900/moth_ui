@@ -16,6 +16,9 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
+
+    - name: Install egl
+      run: sudo apt-get install -y libegl-dev libegl1-mesa-dev
     
     - name: Get Conan
       uses: turtlebrowser/get-conan@v1.0
