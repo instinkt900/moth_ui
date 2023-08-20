@@ -16,7 +16,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install -y \
-          x11proto-dev
+          x11proto-dev \
+          libxcb-dev
 
     - uses: actions/checkout@v2
       with:
@@ -33,7 +34,7 @@ jobs:
 
     - name: Install dependencies
       working-directory: ${{github.workspace}}/editor/build
-      run: conan install .. -s compiler=clang -s compiler.version=14 -s compiler.cppstd=17 --output-folder=. --build=missing
+      run: conan install .. -s compiler=clang -s compiler.version=14 -s compiler.cppstd=17 --output-folder=.
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}/editor/build
