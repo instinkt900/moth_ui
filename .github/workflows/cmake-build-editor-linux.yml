@@ -2,7 +2,6 @@ name: Build Editor Linux
 
 on:
   workflow_dispatch:
-  push:
   pull_request:
     branches: [ main ]
 
@@ -10,7 +9,7 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  build-linux:
+  build-editor-linux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -30,7 +29,7 @@ jobs:
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}/editor/build
-      run: cmake .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/build/conan_toolchain.cmake -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_CXX_COMPILER=clang
+      run: cmake .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/editor/build/conan_toolchain.cmake -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_CXX_COMPILER=clang
 
     - name: Build
       working-directory: ${{github.workspace}}/editor/build
