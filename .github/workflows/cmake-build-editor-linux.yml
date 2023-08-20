@@ -27,7 +27,7 @@ jobs:
       run: sudo conan profile detect --force
 
     - name: Create build dir
-      run: mkdir -p ${{github.workspace}}/editor/build
+      run: sudo mkdir -p ${{github.workspace}}/editor/build
 
     - name: Install dependencies
       working-directory: ${{github.workspace}}/editor/build
@@ -35,9 +35,9 @@ jobs:
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}/editor/build
-      run: cmake .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/editor/build/conan_toolchain.cmake -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_CXX_COMPILER=clang
+      run: sudo cmake .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/editor/build/conan_toolchain.cmake -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_CXX_COMPILER=clang
 
     - name: Build
       working-directory: ${{github.workspace}}/editor/build
-      run: cmake --build . --config ${{env.BUILD_TYPE}}
+      run: sudo cmake --build . --config ${{env.BUILD_TYPE}}
       
