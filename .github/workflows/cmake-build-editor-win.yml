@@ -2,6 +2,7 @@ name: Build Editor Windows
 
 on:
   workflow_dispatch:
+  push:
   pull_request:
     branches: [ main ]
     
@@ -36,4 +37,4 @@ jobs:
 
     - name: Build
       working-directory: ${{github.workspace}}/editor/build
-      run: cmake --build . --config ${{env.BUILD_TYPE}}
+      run: cmake --build . --config ${{env.BUILD_TYPE}} -j
