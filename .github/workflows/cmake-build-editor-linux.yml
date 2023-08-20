@@ -23,13 +23,13 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install -y \
-        libx11-dev \ 
-        libx11-xcb-dev \
-        libfontenc-dev \
-        libice-dev \
-        libsm-dev \
-        libxau-dev \
-        libxaw7-dev
+          libx11-dev \ 
+          libx11-xcb-dev \
+          libfontenc-dev \
+          libice-dev \
+          libsm-dev \
+          libxau-dev \
+          libxaw7-dev
         # libx11-xcb-dev
         # libfontenc-dev
         # libxaw7-dev
