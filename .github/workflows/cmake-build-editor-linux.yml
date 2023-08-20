@@ -17,9 +17,6 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install egl
-      run: sudo apt-get install -y libegl-dev libegl1-mesa-dev
-    
     - name: Get Conan
       uses: turtlebrowser/get-conan@v1.0
       
@@ -31,7 +28,7 @@ jobs:
 
     - name: Install dependencies
       working-directory: ${{github.workspace}}/editor/build
-      run: conan install -s compiler=clang -s compiler.version=14 -s compiler.cppstd=17 .. --output-folder=. --build=missing
+      run: sudo conan install .. -c tools.system.package_manager:mode=install -s compiler=clang -s compiler.version=14 -s compiler.cppstd=17 --output-folder=. --build=missing
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}/editor/build
