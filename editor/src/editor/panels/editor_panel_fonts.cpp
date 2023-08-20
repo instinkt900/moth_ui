@@ -100,6 +100,8 @@ void EditorPanelFonts::DrawContents() {
             ImGui::OpenPopup("Name Font");
             break;
         }
+        default:
+            break;
         }
         s_fileDialog.ClearSelected();
     }

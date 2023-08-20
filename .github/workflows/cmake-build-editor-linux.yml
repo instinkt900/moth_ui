@@ -71,7 +71,7 @@ jobs:
 
     - name: Install dependencies
       working-directory: ${{github.workspace}}/editor/build
-      run: conan install .. -s compiler=clang -s compiler.version=14 -s compiler.cppstd=17 --output-folder=.
+      run: conan install .. -s compiler=clang -s compiler.version=14 -s compiler.cppstd=17 --output-folder=. --build=missing
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}/editor/build
