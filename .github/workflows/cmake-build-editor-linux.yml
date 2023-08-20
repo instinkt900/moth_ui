@@ -17,8 +17,11 @@ jobs:
       with:
         submodules: recursive
 
+    # - name: Get Conan
+    #   uses: turtlebrowser/get-conan@v1.0
+
     - name: Get Conan
-      uses: turtlebrowser/get-conan@v1.0
+      run: sudo pip install conan
       
     - name: Create default profile
       run: conan profile detect --force
