@@ -13,7 +13,10 @@ jobs:
   build-editor-linux:
     runs-on: ubuntu-latest
     steps:
-    - name: Install dependencies
+    - name: Update system packages
+      run: sudo apt-get update
+
+    - name: Install system dependencies
       run: |
         sudo apt-get install -y \
           libegl-dev \
