@@ -9,8 +9,8 @@ namespace imgui_ext {
 
     bool InputString(char const* label, std::string* str) {
         static char buffer[1024];
-        strncpy(buffer, str->c_str(), 1024);
-        if (ImGui::InputText(label, buffer, 1024)) {
+        strncpy(buffer, str->c_str(), 1023);
+        if (ImGui::InputText(label, buffer, 1023)) {
             *str = buffer;
             return true;
         }
