@@ -58,7 +58,7 @@ void ContentList::Refresh() {
                 }
                 m_currentList.push_back(listEntry);
             }
-        } catch (std::exception e) {
+        } catch (std::exception& e) {
         }
     }
 
