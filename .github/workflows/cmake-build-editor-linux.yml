@@ -22,7 +22,9 @@ jobs:
           libice-dev \
           libsm-dev \
           libxau-dev \
-          libxaw7-dev
+          libxaw7-dev \
+          libegl-dev \
+          libegl1-mesa-dev
 
     - uses: actions/checkout@v2
       with:
