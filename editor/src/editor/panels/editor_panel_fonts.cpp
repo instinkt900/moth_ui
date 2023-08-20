@@ -60,9 +60,9 @@ void EditorPanelFonts::DrawContents() {
 
     ImGui::PushID(this);
     if (ImGui::BeginListBox("##font_list", ImVec2(-FLT_MIN, 0))) {
-        for (size_t i = 0; i < fontNames.size(); ++i) {
+        for (int i = 0; i < static_cast<int>(fontNames.size()); ++i) {
             auto const& entryInfo = fontNames[i];
-            bool const selected = static_cast<size_t>(m_selectedIndex) == i;
+            bool const selected = m_selectedIndex == i;
             if (ImGui::Selectable(entryInfo.c_str(), selected)) {
                 m_selectedIndex = i;
             }

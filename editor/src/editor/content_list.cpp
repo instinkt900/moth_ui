@@ -76,9 +76,9 @@ void ContentList::Refresh() {
 void ContentList::Draw() {
     ImGui::PushID(this);
     if (ImGui::BeginListBox("##content_list", ImVec2(-FLT_MIN, -FLT_MIN))) {
-        for (size_t i = 0; i < m_currentList.size(); ++i) {
+        for (int i = 0; i < static_cast<size_t>(m_currentList.size()); ++i) {
             auto const& entryInfo = m_currentList[i];
-            bool const selected = static_cast<size_t>(m_selectedIndex) == i;
+            bool const selected = m_selectedIndex == i;
             if (ImGui::Selectable(entryInfo.m_displayName.c_str(), selected, ImGuiSelectableFlags_AllowDoubleClick)) {
                 m_selectedIndex = i;
                 if (m_clickAction) {
