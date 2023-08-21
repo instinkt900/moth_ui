@@ -21,12 +21,15 @@ jobs:
     - name: Create default profile
       run: conan profile detect --force
 
+    - name: Install conan profiles
+      run: conan config install conan_config
+
     - name: Create build dir
       run: mkdir -p ${{github.workspace}}/build
 
     - name: Install dependencies
       working-directory: ${{github.workspace}}/build
-      run: conan install -s compiler.cppstd=17 .. --output-folder=. --build=missing
+      run: conan install .. --output-folder=. --build=missing --profile windows_profile
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}/build
