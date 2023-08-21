@@ -12,52 +12,6 @@ jobs:
   build-editor-linux:
     runs-on: ubuntu-latest
     steps:
-    - name: Update system packages
-      run: sudo apt-get update
-
-    - name: Install system dependencies
-      run: |
-        sudo apt-get install -y \
-          libegl-dev \
-          libegl1-mesa-dev \
-          libfontenc-dev \
-          libice-dev \
-          libsm-dev \
-          libx11-dev \
-          libx11-xcb-dev \
-          libxau-dev \
-          libxaw7-dev \
-          libxcb-cursor-dev \
-          libxcb-dri3-dev \
-          libxcb-icccm4-dev \
-          libxcb-image0-dev \
-          libxcb-keysyms1-dev \
-          libxcb-randr0-dev \
-          libxcb-render-util0-dev \
-          libxcb-shape0-dev \
-          libxcb-sync-dev \
-          libxcb-util-dev \
-          libxcb-util0-dev \
-          libxcb-xfixes0-dev \
-          libxcb-xinerama0-dev \
-          libxcb-xkb-dev \
-          libxcomposite-dev \
-          libxcursor-dev \
-          libxdamage-dev \
-          libxfixes-dev \
-          libxi-dev \
-          libxinerama-dev \
-          libxmu-dev \
-          libxmuu-dev \
-          libxpm-dev \
-          libxrandr-dev \
-          libxres-dev \
-          libxss-dev \
-          libxtst-dev \
-          libxv-dev \
-          libxvmc-dev \
-          libxxf86vm-dev
-
     - uses: actions/checkout@v2
       with:
         submodules: recursive
@@ -68,12 +22,15 @@ jobs:
     - name: Create default profile
       run: conan profile detect --force
 
+    - name: Install project profiles
+      run: conan config install conan_config
+
     - name: Create build dir
       run: mkdir -p ${{github.workspace}}/editor/build
 
     - name: Install dependencies
       working-directory: ${{github.workspace}}/editor/build
-      run: conan install .. -s compiler=clang -s compiler.version=14 -s compiler.cppstd=17 --output-folder=. --build=missing
+      run: conan install .. --output-folder=. --build=missing --profile linux_profile
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}/editor/build
