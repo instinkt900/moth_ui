@@ -1,14 +1,15 @@
 #pragma once
 
 #include "iimage_factory.h"
-#include "font_factory.h"
+#include "ifont_factory.h"
 #include "irenderer.h"
+#include <cassert>
 
 namespace moth_ui {
     class Context {
     public:
         Context(IImageFactory* imageFactory,
-                FontFactory* fontFactory,
+                IFontFactory* fontFactory,
                 IRenderer* renderer);
         ~Context() = default;
 
@@ -26,7 +27,7 @@ namespace moth_ui {
             return *m_imageFactory;
         }
 
-        FontFactory& GetFontFactory() const {
+        IFontFactory& GetFontFactory() const {
             assert(m_fontFactory && "No font factory?");
             return *m_fontFactory;
         }
@@ -40,7 +41,7 @@ namespace moth_ui {
         static std::shared_ptr<Context> s_currentContext;
 
         IImageFactory* m_imageFactory;
-        FontFactory* m_fontFactory;
+        IFontFactory* m_fontFactory;
         IRenderer* m_renderer;
     };
 }
