@@ -1,6 +1,7 @@
 #pragma once
 
 #include "editor_panel.h"
+#include "moth_ui/context.h"
 
 class EditorPanelPreview : public EditorPanel {
 public:
