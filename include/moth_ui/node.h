@@ -1,6 +1,7 @@
 #pragma once
 
 #include "event_listener.h"
+#include "moth_ui/context.h"
 #include "utils/color.h"
 #include "blend_mode.h"
 #include "layout/layout_rect.h"
@@ -9,8 +10,8 @@
 namespace moth_ui {
     class Node : public EventListener, public std::enable_shared_from_this<Node> {
     public:
-        Node();
-        Node(std::shared_ptr<LayoutEntity> layoutEntity);
+        Node(Context& context);
+        Node(Context& context, std::shared_ptr<LayoutEntity> layoutEntity);
         virtual ~Node();
 
         enum class EventDirection {
@@ -69,6 +70,7 @@ namespace moth_ui {
         AnimationController& GetAnimationController() { return *m_animationController; }
 
     protected:
+        Context& m_context;
         std::shared_ptr<LayoutEntity> m_layout;
 
         Group* m_parent = nullptr;

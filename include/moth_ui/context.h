@@ -13,15 +13,6 @@ namespace moth_ui {
                 IRenderer* renderer);
         ~Context() = default;
 
-        static void SetCurrentContext(std::shared_ptr<Context> context) {
-            s_currentContext = context;
-        }
-
-        static std::shared_ptr<Context> GetCurrentContext() {
-            assert(s_currentContext && "No set context.");
-            return s_currentContext;
-        }
-
         IImageFactory& GetImageFactory() const {
             assert(m_imageFactory && "No image factory?");
             return *m_imageFactory;
@@ -38,8 +29,6 @@ namespace moth_ui {
         }
 
     private:
-        static std::shared_ptr<Context> s_currentContext;
-
         IImageFactory* m_imageFactory;
         IFontFactory* m_fontFactory;
         IRenderer* m_renderer;

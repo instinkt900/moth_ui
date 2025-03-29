@@ -6,8 +6,8 @@
 namespace moth_ui {
     class NodeImage : public Node {
     public:
-        NodeImage();
-        NodeImage(std::shared_ptr<LayoutEntityImage> layoutEntity);
+        NodeImage(Context& context);
+        NodeImage(Context& context, std::shared_ptr<LayoutEntityImage> layoutEntity);
         virtual ~NodeImage();
 
         void UpdateChildBounds() override;

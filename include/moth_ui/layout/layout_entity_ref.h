@@ -13,7 +13,7 @@ namespace moth_ui {
 
         LayoutEntityType GetType() const override { return LayoutEntityType::Ref; }
 
-        std::unique_ptr<Node> Instantiate() override;
+        std::unique_ptr<Node> Instantiate(Context& context) override;
 
         nlohmann::json Serialize(SerializeContext const& context) const override;
         bool Deserialize(nlohmann::json const& json, SerializeContext const& context) override;

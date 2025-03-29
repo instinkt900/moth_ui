@@ -6,8 +6,8 @@
 namespace moth_ui {
     class NodeText : public Node {
     public:
-        NodeText();
-        NodeText(std::shared_ptr<LayoutEntityText> layoutEntity);
+        NodeText(Context& context);
+        NodeText(Context& context, std::shared_ptr<LayoutEntityText> layoutEntity);
         virtual ~NodeText();
 
         void Load(char const* fontName, int size);

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/context.h"
 #include "moth_ui/ui_fwd.h"
 #include "moth_ui/animation_track.h"
 #include "moth_ui/layout/layout_entity_type.h"
@@ -24,7 +25,7 @@ namespace moth_ui {
 
         virtual LayoutEntityType GetType() const { return LayoutEntityType::Entity; }
 
-        virtual std::unique_ptr<Node> Instantiate() = 0;
+        virtual std::unique_ptr<Node> Instantiate(Context& context) = 0;
 
         void SetBounds(LayoutRect const& bounds, int frame);
         LayoutRect GetBoundsAtFrame(float frame) const;
