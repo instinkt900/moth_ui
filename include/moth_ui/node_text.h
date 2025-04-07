@@ -1,7 +1,10 @@
 #pragma once
 
-#include "node.h"
-#include "text_alignment.h"
+#include "moth_ui/node.h"
+#include "moth_ui/text_alignment.h"
+
+#include <memory>
+#include <string>
 
 namespace moth_ui {
     class NodeText : public Node {

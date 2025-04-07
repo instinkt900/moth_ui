@@ -3,6 +3,7 @@
 #include "iimage_factory.h"
 #include "ifont_factory.h"
 #include "irenderer.h"
+
 #include <cassert>
 
 namespace moth_ui {

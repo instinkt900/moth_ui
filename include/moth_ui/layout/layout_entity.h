@@ -7,6 +7,8 @@
 #include "moth_ui/utils/color.h"
 #include "moth_ui/blend_mode.h"
 
+#include <nlohmann/json_fwd.hpp>
+
 namespace moth_ui {
     std::unique_ptr<LayoutEntity> CreateLayoutEntity(LayoutEntityType type);
 

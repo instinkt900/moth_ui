@@ -1,5 +1,8 @@
 #pragma once
 
+#include "moth_ui/iimage.h"
+#include "moth_ui/utils/vector.h"
+
 namespace moth_ui {
     class ITarget {
     public:

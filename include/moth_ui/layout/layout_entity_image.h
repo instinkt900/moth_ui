@@ -5,6 +5,8 @@
 #include "moth_ui/utils/rect.h"
 #include "moth_ui/layout/layout_rect.h"
 
+#include <nlohmann/json_fwd.hpp>
+
 namespace moth_ui {
     class LayoutEntityImage : public LayoutEntity {
     public:

@@ -4,6 +4,8 @@
 #include "moth_ui/node_factory.h"
 #include "moth_ui/group.h"
 
+#include <memory>
+
 namespace moth_ui {
     template <typename T, typename BaseType = Group>
     class Widget : public BaseType {

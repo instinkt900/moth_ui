@@ -1,7 +1,9 @@
 #pragma once
 
-#include "node.h"
-#include "image_scale_type.h"
+#include "moth_ui/node.h"
+#include "moth_ui/image_scale_type.h"
+
+#include <memory>
 
 namespace moth_ui {
     class NodeImage : public Node {

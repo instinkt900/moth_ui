@@ -1,7 +1,11 @@
 #pragma once
 
 #include "ifont_factory.h"
+
 #include <map>
+#include <string>
+#include <filesystem>
+#include <memory>
 
 namespace moth_ui {
     class FontFactory : public IFontFactory {

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <map>
+
 #undef M_PI
 #define _USE_MATH_DEFINES
 #include <math.h>

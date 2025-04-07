@@ -1,6 +1,8 @@
 #pragma once
 
-#include "node.h"
+#include "moth_ui/node.h"
+
+#include <memory>
 
 namespace moth_ui {
     class NodeRect : public Node {

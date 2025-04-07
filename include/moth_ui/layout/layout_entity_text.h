@@ -3,6 +3,11 @@
 #include "moth_ui/layout/layout_entity.h"
 #include "moth_ui/text_alignment.h"
 
+#include <nlohmann/json_fwd.hpp>
+
+#include <string>
+#include <memory>
+
 namespace moth_ui {
     class LayoutEntityText : public LayoutEntity {
     public:

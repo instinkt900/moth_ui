@@ -2,6 +2,8 @@
 
 #include "node.h"
 
+#include <memory>
+
 namespace moth_ui {
     class NodeClip : public Node {
     public:
