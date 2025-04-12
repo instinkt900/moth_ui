@@ -14,6 +14,6 @@ namespace backend::sdl {
             return GetDefaultFont(size);
         }
         SDL_Color defaultColor{ 0x00, 0x00, 0x00, 0xFF };
-        return std::make_unique<Font>(CreateCachedFontRef(&m_renderer, it->second.string().c_str(), size, defaultColor, TTF_STYLE_NORMAL));
+        return std::make_unique<Font>(CreateCachedFontRef(&m_renderer, it->second, size, defaultColor, TTF_STYLE_NORMAL));
     }
 }

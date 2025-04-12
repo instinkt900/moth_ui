@@ -27,7 +27,7 @@ namespace moth_ui {
             json.at("fonts").get_to(relativeList);
 
             for (auto& [name, relPath] : relativeList) {
-                AddFont(name.c_str(), std::filesystem::absolute(rootPath / relPath));
+                AddFont(name, std::filesystem::absolute(rootPath / relPath));
             }
         }
 
