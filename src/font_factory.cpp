@@ -70,7 +70,7 @@ namespace moth_ui {
         return nameList;
     }
 
-    std::filesystem::path FontFactory::GetFontPath(char const* name) const {
+    std::filesystem::path FontFactory::GetFontPath(std::string const& name) const {
         assert(!m_fontPaths.empty() && "No known fonts.");
         auto const it = m_fontPaths.find(name);
         if (std::end(m_fontPaths) == it) {

@@ -20,7 +20,8 @@ namespace moth_ui {
         void ClearFonts() override;
         std::shared_ptr<IFont> GetDefaultFont(int size) override;
         std::vector<std::string> GetFontNameList() const override;
-        std::filesystem::path GetFontPath(char const* name) const override;
+        std::shared_ptr<IFont> GetFont(std::string const& name, int size) override = 0;
+        std::filesystem::path GetFontPath(std::string const& name) const override;
 
     protected:
         std::map<std::string, std::filesystem::path> m_fontPaths;
