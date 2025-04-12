@@ -18,6 +18,6 @@ namespace backend::vulkan {
         if (std::end(m_fontPaths) == it) {
             return GetDefaultFont(size);
         }
-        return m_fontCache.GetFont(it->second.string().c_str(), size);
+        return m_fontCache.GetFont(it->second.string(), size);
     }
 }

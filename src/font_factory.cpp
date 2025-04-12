@@ -2,11 +2,11 @@
 #include "moth_ui/font_factory.h"
 
 namespace moth_ui {
-    void FontFactory::AddFont(char const* name, std::filesystem::path const& path) {
+    void FontFactory::AddFont(std::string const& name, std::filesystem::path const& path) {
         m_fontPaths[name] = path;
     }
 
-    void FontFactory::RemoveFont(char const* name) {
+    void FontFactory::RemoveFont(std::string const& name) {
         m_fontPaths.erase(name);
     }
 
@@ -59,7 +59,7 @@ namespace moth_ui {
     }
 
     std::shared_ptr<moth_ui::IFont> FontFactory::GetDefaultFont(int size) {
-        return GetFont(m_fontPaths.begin()->first.c_str(), size);
+        return GetFont(m_fontPaths.begin()->first, size);
     }
 
     std::vector<std::string> FontFactory::GetFontNameList() const {

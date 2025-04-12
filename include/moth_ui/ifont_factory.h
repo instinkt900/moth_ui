@@ -11,8 +11,8 @@ namespace moth_ui {
     public:
         virtual ~IFontFactory() = default;
 
-        virtual void AddFont(char const* name, std::filesystem::path const& path) = 0;
-        virtual void RemoveFont(char const* name) = 0;
+        virtual void AddFont(std::string const& name, std::filesystem::path const& path) = 0;
+        virtual void RemoveFont(std::string const& name) = 0;
         virtual void LoadProject(std::filesystem::path const& path) = 0;
         virtual void SaveProject(std::filesystem::path const& path) = 0;
         virtual std::filesystem::path GetCurrentProjectPath() const = 0;
