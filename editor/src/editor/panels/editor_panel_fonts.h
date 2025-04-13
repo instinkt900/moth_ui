@@ -3,8 +3,6 @@
 #include "editor_panel.h"
 #include "../confirm_prompt.h"
 #include "../content_list.h"
-#include "moth_ui/context.h"
-#include "moth_ui/ifont_factory.h"
 
 class EditorPanelFonts : public EditorPanel {
 public:
