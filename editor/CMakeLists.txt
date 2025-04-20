@@ -39,7 +39,6 @@ set(SOURCES ${SOURCES}
 	src/editor/confirm_prompt.cpp
 	src/editor/content_list.cpp
 	src/editor/editor_layer.cpp
-	src/editor/editor_layer_stack.cpp
 	src/editor/imgui_ext.cpp
 	src/editor/offset_bounds_handle.cpp
 	src/editor/panels/editor_panel.cpp
