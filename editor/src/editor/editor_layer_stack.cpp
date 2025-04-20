@@ -8,7 +8,7 @@ EditorLayerStack::EditorLayerStack(int renderWidth, int renderHeight, int window
 }
 
 void EditorLayerStack::SetLayerLogicalSize(moth_ui::IntVec2 const& size) {
-    g_App->GetGraphics().SetLogicalSize(size);
+    // g_App->GetGraphics().SetLogicalSize(size);
 }
 
 void EditorLayerStack::DebugDraw() {
