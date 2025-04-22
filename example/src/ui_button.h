@@ -15,7 +15,7 @@ public:
         Activated,
     };
 
-    UIButton(std::shared_ptr<moth_ui::LayoutEntityGroup> entity);
+    UIButton(moth_ui::Context& context, std::shared_ptr<moth_ui::LayoutEntityGroup> entity);
     virtual ~UIButton() = default;
 
     void Update(uint32_t ticks) override;

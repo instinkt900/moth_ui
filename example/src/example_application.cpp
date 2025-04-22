@@ -1,9 +1,7 @@
 #include "example_application.h"
-
-#include "moth_ui/utils/vector_serialization.h"
-#include "moth_ui/layers/layer_stack.h"
-#include "moth_ui/context.h"
 #include "example_layer.h"
+#include "canyon/utils/vector_serialization.h"
+#include "canyon/platform/window.h"
 
 #include <fstream>
 
@@ -11,8 +9,8 @@ char const* const ExampleApplication::IMGUI_FILE = "imgui.ini";
 char const* const ExampleApplication::PERSISTENCE_FILE = "example.json";
 ExampleApplication* g_App;
 
-ExampleApplication::ExampleApplication()
-    : Application("Example") {
+ExampleApplication::ExampleApplication(canyon::platform::IPlatform& platform)
+    : canyon::platform::Application(platform, "Example", 640, 480) {
     m_imguiSettingsPath = (std::filesystem::current_path() / IMGUI_FILE).string();
     m_persistentFilePath = std::filesystem::current_path() / PERSISTENCE_FILE;
     std::ifstream persistenceFile(m_persistentFilePath.string());
@@ -47,7 +45,7 @@ ExampleApplication::~ExampleApplication() {
     g_App = nullptr;
 }
 
-void ExampleApplication::SetupLayers() {
+void ExampleApplication::PostCreateWindow() {
     if (m_persistentState.contains("current_path")) {
         std::string const currentPath = m_persistentState["current_path"];
         try {
@@ -57,12 +55,8 @@ void ExampleApplication::SetupLayers() {
         }
     }
 
-    moth_ui::Context::GetCurrentContext()->GetFontFactory().LoadProject("assets/fonts.json");
-
-
-    auto exampleLayer = std::make_unique<ExampleLayer>("assets/layouts/title.mothui");
-
-    m_layerStack = std::make_unique<moth_ui::LayerStack>(m_windowWidth, m_windowHeight, m_windowWidth, m_windowHeight);
-    m_layerStack->PushLayer(std::move(exampleLayer));
-    m_layerStack->SetEventListener(this);
+    m_window->GetMothContext().GetFontFactory().LoadProject("assets/fonts.json");
+    auto exampleLayer = std::make_unique<ExampleLayer>(m_window->GetMothContext(), "assets/layouts/title.mothui");
+    m_window->GetLayerStack().PushLayer(std::move(exampleLayer));
+    m_window->GetLayerStack().SetEventListener(this);
 }

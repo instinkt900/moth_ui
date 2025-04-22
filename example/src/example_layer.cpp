@@ -4,8 +4,10 @@
 #include "moth_ui/node_factory.h"
 #include "moth_ui/group.h"
 #include "ui_button.h"
+#include "canyon/events/event_window.h"
 
-ExampleLayer::ExampleLayer(std::filesystem::path const& layoutPath) {
+ExampleLayer::ExampleLayer(moth_ui::Context& context, std::filesystem::path const& layoutPath)
+    : m_context(context) {
     LoadLayout(layoutPath);
 
     m_root->SetAnimation("ready");
@@ -62,7 +64,7 @@ void ExampleLayer::OnRemovedFromStack() {
 }
 
 void ExampleLayer::LoadLayout(std::filesystem::path const& path) {
-    m_root = moth_ui::NodeFactory::Get().Create(path, GetWidth(), GetHeight());
+    m_root = moth_ui::NodeFactory::Get().Create(m_context, path, GetWidth(), GetHeight());
     m_root->SetEventHandler([this](moth_ui::Node*, moth_ui::Event const& event) { return OnUIEvent(event); });
 }
 
@@ -84,7 +86,7 @@ bool ExampleLayer::OnAnimationStopped(moth_ui::EventAnimationStopped const& even
     return false;
 }
 
-bool ExampleLayer::OnRequestQuitEvent(EventRequestQuit const& event) {
-    m_layerStack->BroadcastEvent(EventQuit());
+bool ExampleLayer::OnRequestQuitEvent(canyon::EventRequestQuit const& event) {
+    m_layerStack->BroadcastEvent(canyon::EventQuit());
     return true;
 }
