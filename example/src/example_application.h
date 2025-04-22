@@ -3,8 +3,6 @@
 #include "canyon/platform/application.h"
 #include <nlohmann/json.hpp>
 
-#define USE_VULKAN
-
 class ExampleApplication : public canyon::platform::Application
 {
 public:
