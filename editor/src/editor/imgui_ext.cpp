@@ -61,7 +61,7 @@ namespace imgui_ext {
     void Image(canyon::graphics::IImage const* image, int width, int height) {
         // TODO:
         if (image) {
-            // image->ImGui({ width, height });
+            image->ImGui({ width, height });
         } else {
             //ImGui::Image(nullptr, ImVec2(static_cast<float>(width), static_cast<float>(height)));
         }
