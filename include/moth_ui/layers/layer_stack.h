@@ -13,7 +13,7 @@ namespace moth_ui {
     class LayerStack : public EventListener {
     public:
         LayerStack(IRenderer& renderer, int renderWidth, int renderHeight, int windowWidth, int windowHeight);
-         ~LayerStack();
+        ~LayerStack();
 
         void PushLayer(std::unique_ptr<Layer>&& layer);
         std::unique_ptr<Layer> PopLayer();
