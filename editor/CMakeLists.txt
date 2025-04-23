@@ -15,7 +15,6 @@ add_compile_definitions(_CRT_SECURE_NO_WARNINGS IMGUI_DEFINE_MATH_OPERATORS)
 add_subdirectory(../external/nativefiledialog nativefiledialog)
 
 include_directories(../external/imgui)
-#include_directories(../external/murmurhash.c)
 
 set(SOURCES ${SOURCES}
 	src/editor/actions/add_action.cpp
@@ -58,37 +57,15 @@ set(SOURCES ${SOURCES}
 	src/main.cpp
 )
 
-#find_package(fmt REQUIRED)
-#find_package(freetype REQUIRED)
-#find_package(glfw3 REQUIRED)
 find_package(magic_enum REQUIRED)
-#find_package(nlohmann_json REQUIRED)
 find_package(range-v3 REQUIRED)
-#find_package(SDL2 REQUIRED)
-#find_package(SDL2_image REQUIRED)
-#find_package(SDL2_ttf REQUIRED)
-#find_package(spdlog REQUIRED)
-#find_package(Vulkan REQUIRED)
-#find_package(vulkan-memory-allocator REQUIRED)
 find_package(canyon REQUIRED)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 target_include_directories(${PROJECT_NAME} PRIVATE src)
-#target_link_libraries(${PROJECT_NAME} moth_ui::moth_ui)
-#target_link_libraries(${PROJECT_NAME} fmt::fmt)
-#target_link_libraries(${PROJECT_NAME} freetype)
-#target_link_libraries(${PROJECT_NAME} glfw)
 target_link_libraries(${PROJECT_NAME} magic_enum::magic_enum)
-#target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 target_link_libraries(${PROJECT_NAME} range-v3::range-v3)
-#target_link_libraries(${PROJECT_NAME} SDL2::SDL2main)
-#target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
-#target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf-static)
-#target_link_libraries(${PROJECT_NAME} spdlog::spdlog)
-#target_link_libraries(${PROJECT_NAME} Vulkan::Vulkan)
-#target_link_libraries(${PROJECT_NAME} vulkan-memory-allocator::vulkan-memory-allocator)
-#target_link_libraries(${PROJECT_NAME} harfbuzz)
 target_link_libraries(${PROJECT_NAME} nativefiledialog)
 target_link_libraries(${PROJECT_NAME} canyon::canyon)
 
