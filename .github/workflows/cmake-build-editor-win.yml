@@ -27,7 +27,7 @@ jobs:
         conan install . --build=missing --profile windows_profile
         conan install . --build=missing --profile windows_profile -s build_type=Debug
         conan upload "*" -r=artifactory -c
-        ./build/Release/generators/conanbuild.bat
+        ./build/generators/conanbuild.bat
 
     - name: Configure CMake
       working-directory: ${{github.workspace}}/editor
