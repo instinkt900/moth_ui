@@ -12,20 +12,20 @@ class MothUIEditor(ConanFile):
             self.options["libpng"].shared = True
 
     def requirements(self):
-        self.requires("sdl/2.28.3")
-        self.requires("sdl_image/2.0.5")
-        self.requires("sdl_ttf/2.20.2")
-        self.requires("nlohmann_json/3.11.2")
+        # self.requires("sdl/2.28.3")
+        # self.requires("sdl_image/2.0.5")
+        # self.requires("sdl_ttf/2.20.2")
+        # self.requires("nlohmann_json/3.11.2")
         self.requires("magic_enum/0.7.3")
         self.requires("range-v3/0.12.0")
-        self.requires("fmt/10.1.1", override=True)
-        self.requires("vulkan-headers/1.3.243.0")
-        self.requires("vulkan-loader/1.3.243.0")
-        self.requires("spdlog/1.12.0")
-        self.requires("glfw/3.3.8")
-        self.requires("vulkan-memory-allocator/3.0.1")
-        self.requires("freetype/2.13.2")
-        self.requires("libpng/1.6.42", override=True)
+        # self.requires("fmt/10.1.1", override=True)
+        # self.requires("vulkan-headers/1.3.243.0")
+        # self.requires("vulkan-loader/1.3.243.0")
+        # self.requires("spdlog/1.12.0")
+        # self.requires("glfw/3.3.8")
+        # self.requires("vulkan-memory-allocator/3.0.1")
+        # self.requires("freetype/2.13.2")
+        # self.requires("libpng/1.6.42", override=True)
         self.requires("canyon/0.1.0")
 
         if self.settings.os == "Windows":
