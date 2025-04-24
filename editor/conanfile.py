@@ -2,7 +2,7 @@ from conan import ConanFile
 from conan.tools.cmake import cmake_layout
 
 class MothUIEditor(ConanFile):
-    name = "moth_ui Editor"
+    name = "moth_ui_editor"
     version = "0.1"
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeToolchain", "CMakeDeps", "MSBuildToolchain", "MSBuildDeps"
@@ -12,9 +12,7 @@ class MothUIEditor(ConanFile):
             self.options["libpng"].shared = True
 
     def requirements(self):
-        self.requires("magic_enum/0.7.3")
-        self.requires("range-v3/0.12.0")
-        self.requires("canyon/0.1.0")
+        self.requires("canyon/0.2.0")
 
         if self.settings.os == "Windows":
             self.requires("libgettext/0.21", override=True)

@@ -7,14 +7,9 @@ message("Building with CMake version: ${CMAKE_VERSION}")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
-add_compile_definitions(_CRT_SECURE_NO_WARNINGS IMGUI_DEFINE_MATH_OPERATORS)
-
 add_subdirectory(../external/nativefiledialog nativefiledialog)
-
-include_directories(../external/imgui)
 
 set(SOURCES ${SOURCES}
 	src/editor/actions/add_action.cpp
@@ -57,15 +52,11 @@ set(SOURCES ${SOURCES}
 	src/main.cpp
 )
 
-find_package(magic_enum REQUIRED)
-find_package(range-v3 REQUIRED)
 find_package(canyon REQUIRED)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 target_include_directories(${PROJECT_NAME} PRIVATE src)
-target_link_libraries(${PROJECT_NAME} magic_enum::magic_enum)
-target_link_libraries(${PROJECT_NAME} range-v3::range-v3)
 target_link_libraries(${PROJECT_NAME} nativefiledialog)
 target_link_libraries(${PROJECT_NAME} canyon::canyon)
 
