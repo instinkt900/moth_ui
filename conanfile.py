@@ -6,7 +6,7 @@ class MothUI(ConanFile):
     name = "moth_ui"
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeToolchain", "CMakeDeps"
-    exports_sources = "CMakeLists.txt", "include/*", "src/*"
+    exports_sources = "CMakeLists.txt", "version.txt", "include/*", "src/*"
     package_type = "static-library"
 
     def set_version(self):
