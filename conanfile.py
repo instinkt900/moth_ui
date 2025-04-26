@@ -23,7 +23,7 @@ class MothUI(ConanFile):
         self.requires("nlohmann_json/3.11.2", transitive_headers=True)
         self.requires("magic_enum/0.7.3", transitive_headers=True)
         self.requires("range-v3/0.12.0", transitive_headers=True)
-        self.requires("fmt/[>=10.0.0, <11.0.0]", transitive_headers=True)
+        self.requires("fmt/[>=10.0.0 <11.0.0]", transitive_headers=True)
 
     def build_requirements(self):
         self.tool_requires("cmake/[>=3.27.0]")
