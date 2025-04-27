@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/ui_fwd.h"
 #include "moth_ui/layout/layout_entity_group.h"
 
@@ -8,7 +9,7 @@
 #include <filesystem>
 
 namespace moth_ui {
-    class LayoutEntityRef : public LayoutEntityGroup {
+    class MOTH_UI_API LayoutEntityRef : public LayoutEntityGroup {
     public:
         LayoutEntityRef(LayoutRect const& initialBounds, Layout const& layoutRef);
         explicit LayoutEntityRef(LayoutEntityGroup* parent);

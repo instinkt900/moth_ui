@@ -1,12 +1,13 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/node.h"
 #include "moth_ui/image_scale_type.h"
 
 #include <memory>
 
 namespace moth_ui {
-    class NodeImage : public Node {
+    class MOTH_UI_API NodeImage : public Node {
     public:
         NodeImage(Context& context);
         NodeImage(Context& context, std::shared_ptr<LayoutEntityImage> layoutEntity);

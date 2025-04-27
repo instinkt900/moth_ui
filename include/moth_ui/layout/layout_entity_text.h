@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/layout/layout_entity.h"
 #include "moth_ui/text_alignment.h"
 
@@ -9,7 +10,7 @@
 #include <memory>
 
 namespace moth_ui {
-    class LayoutEntityText : public LayoutEntity {
+    class MOTH_UI_API LayoutEntityText : public LayoutEntity {
     public:
         explicit LayoutEntityText(LayoutRect const& initialBounds);
         explicit LayoutEntityText(LayoutEntityGroup* parent);

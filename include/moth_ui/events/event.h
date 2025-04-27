@@ -1,9 +1,10 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include <memory> 
 
 namespace moth_ui {
-    enum EventType : int {
+    enum MOTH_UI_API EventType : int {
         EVENTTYPE_KEY,
         EVENTTYPE_MOUSE_DOWN,
         EVENTTYPE_MOUSE_UP,
@@ -18,7 +19,7 @@ namespace moth_ui {
         EVENTTYPE_USER2 = 3000,
     };
 
-    class Event {
+    class MOTH_UI_API Event {
     public:
         Event(int type)
             : m_type(type) {}
@@ -32,7 +33,7 @@ namespace moth_ui {
     };
 
     template <typename T>
-    T const* event_cast(Event const& event) {
+    T const* MOTH_UI_API event_cast(Event const& event) {
         if (event.GetType() == T::GetStaticType()) {
             return static_cast<T const*>(&event);
         }

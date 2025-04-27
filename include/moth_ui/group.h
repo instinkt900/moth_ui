@@ -1,10 +1,11 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/node.h"
 #include "moth_ui/animation_controller.h"
 
 namespace moth_ui {
-    class Group : public Node {
+    class MOTH_UI_API Group : public Node {
     public:
         Group(Context& context);
         Group(Context& context, std::shared_ptr<LayoutEntityGroup> layoutEntityGroup);

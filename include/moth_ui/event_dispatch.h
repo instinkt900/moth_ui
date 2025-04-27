@@ -1,12 +1,13 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/events/event.h"
 #include "moth_ui/event_listener.h"
 
 #include <functional>
 
 namespace moth_ui {
-    class EventDispatch {
+    class MOTH_UI_API EventDispatch {
     public:
         EventDispatch(Event const& event)
             : m_event(event) {}

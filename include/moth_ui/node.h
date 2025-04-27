@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/event_listener.h"
 #include "moth_ui/context.h"
 #include "moth_ui/utils/color.h"
@@ -10,7 +11,7 @@
 #include <memory>
 
 namespace moth_ui {
-    class Node : public EventListener, public std::enable_shared_from_this<Node> {
+    class MOTH_UI_API Node : public EventListener, public std::enable_shared_from_this<Node> {
     public:
         Node(Context& context);
         Node(Context& context, std::shared_ptr<LayoutEntity> layoutEntity);

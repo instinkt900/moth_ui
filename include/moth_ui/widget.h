@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/context.h"
 #include "moth_ui/node_factory.h"
 #include "moth_ui/group.h"
@@ -8,7 +9,7 @@
 
 namespace moth_ui {
     template <typename T, typename BaseType = Group>
-    class Widget : public BaseType {
+    class MOTH_UI_API Widget : public BaseType {
     public:
         Widget(Context& context, std::shared_ptr<LayoutEntityGroup> entity)
             : BaseType(context, entity) {

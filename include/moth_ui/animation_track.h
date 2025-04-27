@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/utils/interp.h"
 
 #include <nlohmann/json_fwd.hpp>
@@ -36,7 +37,7 @@ namespace moth_ui {
 
     using KeyframeValue = float;
 
-    class Keyframe {
+    class MOTH_UI_API Keyframe {
     public:
         Keyframe() = default;
         Keyframe(int frame, KeyframeValue value)
@@ -68,7 +69,7 @@ namespace moth_ui {
         }
     };
 
-    class AnimationEvent {
+    class MOTH_UI_API AnimationEvent {
     public:
         AnimationEvent() = default;
         AnimationEvent(int frame, std::string const& name)
@@ -97,7 +98,7 @@ namespace moth_ui {
         }
     };
 
-    class AnimationTrack {
+    class MOTH_UI_API AnimationTrack {
     public:
         enum class Target {
             Unknown,

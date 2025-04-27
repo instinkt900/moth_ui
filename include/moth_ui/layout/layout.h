@@ -1,11 +1,12 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/context.h"
 #include "moth_ui/ui_fwd.h"
 #include "moth_ui/layout/layout_entity_group.h"
 
 namespace moth_ui {
-    class Layout : public LayoutEntityGroup {
+    class MOTH_UI_API Layout : public LayoutEntityGroup {
     public:
         Layout();
         virtual ~Layout() = default;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/layout/layout_entity.h"
 #include "moth_ui/image_scale_type.h"
 #include "moth_ui/utils/rect.h"
@@ -8,7 +9,7 @@
 #include <nlohmann/json_fwd.hpp>
 
 namespace moth_ui {
-    class LayoutEntityImage : public LayoutEntity {
+    class MOTH_UI_API LayoutEntityImage : public LayoutEntity {
     public:
         explicit LayoutEntityImage(LayoutRect const& initialBounds);
         explicit LayoutEntityImage(LayoutEntityGroup* parent);

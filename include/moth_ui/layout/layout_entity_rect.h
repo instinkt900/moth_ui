@@ -1,11 +1,12 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/layout/layout_entity.h"
 
 #include <nlohmann/json_fwd.hpp>
 
 namespace moth_ui {
-    class LayoutEntityRect : public LayoutEntity {
+    class MOTH_UI_API LayoutEntityRect : public LayoutEntity {
     public:
         explicit LayoutEntityRect(LayoutRect const& initialBounds);
         explicit LayoutEntityRect(LayoutEntityGroup* parent);

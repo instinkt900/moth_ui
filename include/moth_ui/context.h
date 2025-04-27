@@ -1,13 +1,14 @@
 #pragma once
 
-#include "iimage_factory.h"
-#include "ifont_factory.h"
-#include "irenderer.h"
+#include "moth_ui/moth_ui.h"
+#include "moth_ui/iimage_factory.h"
+#include "moth_ui/ifont_factory.h"
+#include "moth_ui/irenderer.h"
 
 #include <cassert>
 
 namespace moth_ui {
-    class Context {
+    class MOTH_UI_API Context {
     public:
         Context(IImageFactory* imageFactory,
                 IFontFactory* fontFactory,

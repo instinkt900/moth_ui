@@ -1,9 +1,10 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/utils/vector.h"
 
 namespace moth_ui {
-    class IImage {
+    class MOTH_UI_API IImage {
     public:
         virtual ~IImage() = default;
 

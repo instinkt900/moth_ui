@@ -1,10 +1,11 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/utils/rect.h"
 #include "moth_ui/utils/rect_serialization.h"
 
 namespace moth_ui {
-    struct LayoutRect {
+    struct MOTH_UI_API LayoutRect {
         FloatRect anchor;
         FloatRect offset;
     };

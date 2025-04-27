@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include <map>
 
 #undef M_PI
@@ -12,7 +13,7 @@
 namespace moth_ui {
     // Smoothing functions from http://easings.net/ (With visual examples)
 
-    enum class InterpType {
+    enum class MOTH_UI_API InterpType {
         Unknown,
 
         Step,

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/node.h"
 #include "moth_ui/text_alignment.h"
 
@@ -7,7 +8,7 @@
 #include <string>
 
 namespace moth_ui {
-    class NodeText : public Node {
+    class MOTH_UI_API NodeText : public Node {
     public:
         NodeText(Context& context);
         NodeText(Context& context, std::shared_ptr<LayoutEntityText> layoutEntity);

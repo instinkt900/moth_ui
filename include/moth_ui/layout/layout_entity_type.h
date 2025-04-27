@@ -1,7 +1,9 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
+
 namespace moth_ui {
-    enum class LayoutEntityType {
+    enum class MOTH_UI_API LayoutEntityType {
         Unknown,
         Layout,
         Group,

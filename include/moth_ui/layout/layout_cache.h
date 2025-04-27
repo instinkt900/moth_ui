@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/ui_fwd.h"
 
 #include <memory>
@@ -7,7 +8,7 @@
 #include <map>
 
 namespace moth_ui {
-    class LayoutCache {
+    class MOTH_UI_API LayoutCache {
     public:
         void SetLayoutRoot(char const* path);
 

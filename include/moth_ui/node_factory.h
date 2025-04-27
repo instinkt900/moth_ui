@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/context.h"
 #include "moth_ui/ui_fwd.h"
 
@@ -8,7 +9,7 @@
 #include <filesystem>
 
 namespace moth_ui {
-    class NodeFactory {
+    class MOTH_UI_API NodeFactory {
     public:
         virtual ~NodeFactory() = default;
 

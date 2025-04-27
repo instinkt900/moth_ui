@@ -1,12 +1,13 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/iimage.h"
 
 #include <filesystem>
 #include <memory>
 
 namespace moth_ui {
-    class IImageFactory {
+    class MOTH_UI_API IImageFactory {
     public:
         virtual ~IImageFactory() = default;
 

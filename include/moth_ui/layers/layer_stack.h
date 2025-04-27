@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/event_listener.h"
 #include "moth_ui/utils/vector.h"
 #include "moth_ui/irenderer.h"
@@ -10,7 +11,7 @@
 namespace moth_ui {
     class Layer;
 
-    class LayerStack : public EventListener {
+    class MOTH_UI_API LayerStack : public EventListener {
     public:
         LayerStack(IRenderer& renderer, int renderWidth, int renderHeight, int windowWidth, int windowHeight);
         ~LayerStack();

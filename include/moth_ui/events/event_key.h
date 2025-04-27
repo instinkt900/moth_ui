@@ -1,27 +1,28 @@
 #pragma once
 
-#include "event.h"
+#include "moth_ui/moth_ui.h"
+#include "moth_ui/events/event.h"
 
 #include <memory>
 
 namespace moth_ui {
-    enum class KeyAction {
+    enum class MOTH_UI_API KeyAction {
         Down,
         Up
     };
 
-    static int constexpr KeyMod_LeftShift = 1 << 0;
-    static int constexpr KeyMod_RightShift = 1 << 1;
-    static int constexpr KeyMod_LeftCtrl = 1 << 2;
-    static int constexpr KeyMod_RightCtrl = 1 << 3;
-    static int constexpr KeyMod_LeftAlt = 1 << 4;
-    static int constexpr KeyMod_RightAlt = 1 << 5;
+    static int constexpr MOTH_UI_API KeyMod_LeftShift = 1 << 0;
+    static int constexpr MOTH_UI_API KeyMod_RightShift = 1 << 1;
+    static int constexpr MOTH_UI_API KeyMod_LeftCtrl = 1 << 2;
+    static int constexpr MOTH_UI_API KeyMod_RightCtrl = 1 << 3;
+    static int constexpr MOTH_UI_API KeyMod_LeftAlt = 1 << 4;
+    static int constexpr MOTH_UI_API KeyMod_RightAlt = 1 << 5;
 
-    static int constexpr KeyMod_Shift = KeyMod_LeftShift | KeyMod_RightShift;
-    static int constexpr KeyMod_Ctrl = KeyMod_LeftCtrl | KeyMod_RightCtrl;
-    static int constexpr KeyMod_Alt = KeyMod_LeftAlt | KeyMod_RightAlt;
+    static int constexpr MOTH_UI_API KeyMod_Shift = KeyMod_LeftShift | KeyMod_RightShift;
+    static int constexpr MOTH_UI_API KeyMod_Ctrl = KeyMod_LeftCtrl | KeyMod_RightCtrl;
+    static int constexpr MOTH_UI_API KeyMod_Alt = KeyMod_LeftAlt | KeyMod_RightAlt;
 
-    enum class Key {
+    enum class MOTH_UI_API Key {
         Unknown,
 
         Return,
@@ -150,7 +151,7 @@ namespace moth_ui {
         Ralt,
     };
 
-    class EventKey : public Event {
+    class MOTH_UI_API EventKey : public Event {
     public:
         EventKey(KeyAction action, Key key, int mods)
             : Event(GetStaticType())

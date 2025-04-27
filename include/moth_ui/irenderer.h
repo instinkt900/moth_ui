@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/utils/rect.h"
 #include "moth_ui/iimage.h"
 #include "moth_ui/ifont.h"
@@ -11,7 +12,7 @@
 #include <string>
 
 namespace moth_ui {
-    class IRenderer {
+    class MOTH_UI_API IRenderer {
     public:
         virtual ~IRenderer() = default;
 

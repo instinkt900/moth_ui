@@ -1,10 +1,12 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
+
 #include <string>
 #include <nlohmann/json.hpp>
 
 namespace moth_ui {
-    struct AnimationClip {
+    struct MOTH_UI_API AnimationClip {
         AnimationClip() = default;
 
         enum class LoopType {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/events/event.h"
 #include "moth_ui/node.h"
 
@@ -7,7 +8,7 @@
 #include <string>
 
 namespace moth_ui {
-    class EventAnimation : public Event {
+    class MOTH_UI_API EventAnimation : public Event {
     public:
         EventAnimation(Node* node, std::string const& name)
             : Event(GetStaticType())
@@ -29,7 +30,7 @@ namespace moth_ui {
         std::string m_name;
     };
 
-    class EventAnimationStarted : public Event {
+    class MOTH_UI_API EventAnimationStarted : public Event {
     public:
         EventAnimationStarted(Node* node, std::string const& clipName)
             : Event(GetStaticType())
@@ -51,7 +52,7 @@ namespace moth_ui {
         std::string m_clipName;
     };
 
-    class EventAnimationStopped : public Event {
+    class MOTH_UI_API EventAnimationStopped : public Event {
     public:
         EventAnimationStopped(Node* node, std::string const& clipName)
             : Event(GetStaticType())

@@ -1,19 +1,20 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/events/event.h"
 #include "moth_ui/utils/vector.h"
 
 #include <memory>
 
 namespace moth_ui {
-    enum class MouseButton {
+    enum class MOTH_UI_API MouseButton {
         Unknown,
         Left,
         Middle,
         Right,
     };
 
-    class EventMouseDown : public Event {
+    class MOTH_UI_API EventMouseDown : public Event {
     public:
         EventMouseDown(MouseButton button, IntVec2 const& position)
             : Event(GetStaticType())
@@ -35,7 +36,7 @@ namespace moth_ui {
         IntVec2 m_position;
     };
 
-    class EventMouseUp : public Event {
+    class MOTH_UI_API EventMouseUp : public Event {
     public:
         EventMouseUp(MouseButton button, IntVec2 const& position)
             : Event(GetStaticType())
@@ -57,7 +58,7 @@ namespace moth_ui {
         IntVec2 m_position;
     };
 
-    class EventMouseMove : public Event {
+    class MOTH_UI_API EventMouseMove : public Event {
     public:
         EventMouseMove(IntVec2 const& position, FloatVec2 const& delta)
             : Event(GetStaticType())
@@ -79,7 +80,7 @@ namespace moth_ui {
         FloatVec2 m_delta;
     };
 
-    class EventMouseWheel : public Event {
+    class MOTH_UI_API EventMouseWheel : public Event {
     public:
         EventMouseWheel(IntVec2 const& delta)
             : Event(GetStaticType())

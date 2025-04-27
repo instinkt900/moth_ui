@@ -1,10 +1,11 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/event_listener.h"
 #include "moth_ui/layers/layer_stack.h"
 
 namespace moth_ui {
-    class Layer : public EventListener {
+    class MOTH_UI_API Layer : public EventListener {
     public:
         Layer();
         virtual ~Layer();

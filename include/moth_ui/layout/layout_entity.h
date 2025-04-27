@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/context.h"
 #include "moth_ui/ui_fwd.h"
 #include "moth_ui/animation_track.h"
@@ -10,9 +11,9 @@
 #include <nlohmann/json_fwd.hpp>
 
 namespace moth_ui {
-    std::unique_ptr<LayoutEntity> CreateLayoutEntity(LayoutEntityType type);
+    std::unique_ptr<LayoutEntity> MOTH_UI_API CreateLayoutEntity(LayoutEntityType type);
 
-    class LayoutEntity : public std::enable_shared_from_this<LayoutEntity> {
+    class MOTH_UI_API LayoutEntity : public std::enable_shared_from_this<LayoutEntity> {
     public:
         explicit LayoutEntity(LayoutRect const& initialBounds);
         explicit LayoutEntity(LayoutEntityGroup* parent);

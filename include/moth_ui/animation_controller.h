@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/moth_ui.h"
 #include "moth_ui/animation_track.h"
 #include "moth_ui/ui_fwd.h"
 
@@ -7,7 +8,7 @@
 #include <memory>
 
 namespace moth_ui {
-    class AnimationTrackController {
+    class MOTH_UI_API AnimationTrackController {
     public:
         AnimationTrackController(float& target, AnimationTrack& track);
 
@@ -19,7 +20,7 @@ namespace moth_ui {
         AnimationTrack& m_track;
     };
 
-    class AnimationController {
+    class MOTH_UI_API AnimationController {
     public:
         AnimationController(Node* node);
 
@@ -30,7 +31,7 @@ namespace moth_ui {
         std::vector<std::unique_ptr<AnimationTrackController>> m_trackControllers;
     };
 
-    class AnimationClipController {
+    class MOTH_UI_API AnimationClipController {
     public:
         AnimationClipController(Group* group);
 
