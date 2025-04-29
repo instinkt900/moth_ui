@@ -33,7 +33,7 @@ namespace moth_ui {
     };
 
     template <typename T>
-    T const* MOTH_UI_API event_cast(Event const& event) {
+    T const* event_cast(Event const& event) {
         if (event.GetType() == T::GetStaticType()) {
             return static_cast<T const*>(&event);
         }
