@@ -1,7 +1,7 @@
 #include "common.h"
 #include "moth_ui/group.h"
 #include "moth_ui/layout/layout_entity_group.h"
-#include "moth_ui/animation_clip.h"
+#include "moth_ui/animation/animation_clip.h"
 #include "moth_ui/event_dispatch.h"
 #include "moth_ui/node_clip.h"
 #include "moth_ui/context.h"

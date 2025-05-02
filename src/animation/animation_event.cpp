@@ -1,5 +1,5 @@
 #include "common.h"
-#include "moth_ui/animation_event.h"
+#include "moth_ui/animation/animation_event.h"
 
 namespace moth_ui {
     void to_json(nlohmann::json& j, AnimationEvent const& event) {

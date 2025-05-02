@@ -1,7 +1,7 @@
 #pragma once
 
 #include "moth_ui/node.h"
-#include "moth_ui/animation_clip.h"
+#include "moth_ui/animation/animation_clip.h"
 
 namespace moth_ui {
     class ClipController {

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "moth_ui/layout/layout_entity.h"
-#include "moth_ui/animation_clip.h"
-#include "moth_ui/animation_event.h"
+#include "moth_ui/animation/animation_clip.h"
+#include "moth_ui/animation/animation_event.h"
 
 #include <nlohmann/json_fwd.hpp>
 

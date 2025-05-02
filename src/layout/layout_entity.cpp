@@ -6,7 +6,7 @@
 #include "moth_ui/layout/layout_entity_rect.h"
 #include "moth_ui/layout/layout_entity_ref.h"
 #include "moth_ui/layout/layout_entity_clip.h"
-#include "moth_ui/keyframe.h"
+#include "moth_ui/animation/keyframe.h"
 
 namespace moth_ui {
     std::unique_ptr<LayoutEntity> CreateLayoutEntity(LayoutEntityType type) {

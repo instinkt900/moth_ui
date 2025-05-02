@@ -1,5 +1,5 @@
 #include "common.h"
-#include "moth_ui/keyframe.h"
+#include "moth_ui/animation/keyframe.h"
 
 namespace nlohmann {
     template <>

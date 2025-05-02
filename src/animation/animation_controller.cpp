@@ -1,6 +1,6 @@
 #include "common.h"
-#include "moth_ui/animation_controller.h"
-#include "moth_ui/animation_track_controller.h"
+#include "moth_ui/animation/animation_controller.h"
+#include "moth_ui/animation/animation_track_controller.h"
 #include "moth_ui/layout/layout_entity.h"
 #include "moth_ui/node.h"
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "moth_ui/ui_fwd.h"
-#include "moth_ui/animation_track_controller.h"
+#include "moth_ui/animation/animation_track_controller.h"
 
 #include <vector>
 #include <memory>
