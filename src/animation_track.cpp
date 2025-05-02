@@ -1,9 +1,25 @@
 #include "common.h"
 #include "moth_ui/animation_track.h"
-#include "moth_ui/animation_clip.h"
-#include "moth_ui/utils/math_utils.h"
+#include "moth_ui/keyframe.h"
 
 namespace moth_ui {
+    void to_json(nlohmann::json& j, AnimationTrack const& track) {
+        j["target"] = track.m_target;
+        std::vector<Keyframe> keyframes;
+        for (auto& keyframe : track.m_keyframes) {
+            keyframes.push_back(*keyframe);
+        }
+        j["keyframes"] = keyframes;
+    }
+
+    void from_json(nlohmann::json const& j, AnimationTrack& track) {
+        track.m_target = j.value("target", AnimationTrack::Target::Unknown);
+        auto keyframes = j.value("keyframes", std::vector<Keyframe>{});
+        for (auto& keyframe : keyframes) {
+            track.m_keyframes.push_back(std::make_unique<Keyframe>(keyframe));
+        }
+    }
+
     AnimationTrack::AnimationTrack(AnimationTrack const& other)
         : m_target(other.m_target) {
         for (auto&& keyframe : other.m_keyframes) {

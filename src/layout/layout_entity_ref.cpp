@@ -3,7 +3,6 @@
 #include "moth_ui/group.h"
 #include "moth_ui/layout/layout.h"
 #include "moth_ui/animation_clip.h"
-#include "moth_ui/node_factory.h"
 
 namespace moth_ui {
     LayoutEntityRef::LayoutEntityRef(LayoutRect const& initialBounds, Layout const& layoutRef)

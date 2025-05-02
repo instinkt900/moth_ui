@@ -1,7 +1,7 @@
 #pragma once
 
 #include "moth_ui/node.h"
-#include "moth_ui/animation_controller.h"
+#include "moth_ui/animation_clip_controller.h"
 
 namespace moth_ui {
     class Group : public Node {
