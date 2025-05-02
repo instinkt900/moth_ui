@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ui_fwd.h"
+#include "moth_ui/ui_fwd.h"
 
 namespace moth_ui {
     class EventListener {
