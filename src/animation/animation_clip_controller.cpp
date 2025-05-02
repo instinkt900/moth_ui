@@ -3,7 +3,7 @@
 #include "moth_ui/animation/animation_controller.h"
 #include "moth_ui/animation/animation_clip.h"
 #include "moth_ui/events/event_animation.h"
-#include "moth_ui/group.h"
+#include "moth_ui/nodes/group.h"
 #include "moth_ui/layout/layout_entity_group.h"
 
 namespace moth_ui {

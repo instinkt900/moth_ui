@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moth_ui/node.h"
+#include "moth_ui/nodes/node.h"
 #include "moth_ui/text_alignment.h"
 
 #include <memory>

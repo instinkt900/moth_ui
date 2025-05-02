@@ -1,8 +1,8 @@
 #include "common.h"
-#include "moth_ui/node.h"
+#include "moth_ui/nodes/node.h"
 #include "moth_ui/layout/layout_entity.h"
 #include "moth_ui/animation/animation_controller.h"
-#include "moth_ui/group.h"
+#include "moth_ui/nodes/group.h"
 #include "moth_ui/context.h"
 
 namespace moth_ui {

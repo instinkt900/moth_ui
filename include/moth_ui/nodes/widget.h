@@ -2,7 +2,7 @@
 
 #include "moth_ui/context.h"
 #include "moth_ui/node_factory.h"
-#include "moth_ui/group.h"
+#include "moth_ui/nodes/group.h"
 
 #include <memory>
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "node.h"
+#include "moth_ui/nodes/node.h"
 
 #include <memory>
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "moth_ui/events/event.h"
-#include "moth_ui/node.h"
+#include "moth_ui/nodes/node.h"
 
 #include <memory>
 #include <string>
