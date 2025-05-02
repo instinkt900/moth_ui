@@ -15,6 +15,7 @@ namespace moth_ui {
     void from_json(nlohmann::json const& j, AnimationTrack& track) {
         track.m_target = j.value("target", AnimationTrack::Target::Unknown);
         auto keyframes = j.value("keyframes", std::vector<Keyframe>{});
+        track.m_keyframes.clear();
         for (auto& keyframe : keyframes) {
             track.m_keyframes.push_back(std::make_unique<Keyframe>(keyframe));
         }
