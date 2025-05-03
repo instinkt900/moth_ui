@@ -3,7 +3,6 @@
 #include "moth_ui/ui_fwd.h"
 
 #include <nlohmann/json_fwd.hpp>
-
 #include <string>
 
 namespace moth_ui {

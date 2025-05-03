@@ -1,11 +1,11 @@
 #pragma once
 
-#include "moth_ui/events/event_listener.h"
 #include "moth_ui/context.h"
-#include "moth_ui/utils/color.h"
-#include "moth_ui/blend_mode.h"
+#include "moth_ui/events/event_listener.h"
+#include "moth_ui/graphics/blend_mode.h"
 #include "moth_ui/layout/layout_rect.h"
 #include "moth_ui/ui_fwd.h"
+#include "moth_ui/utils/color.h"
 
 #include <memory>
 

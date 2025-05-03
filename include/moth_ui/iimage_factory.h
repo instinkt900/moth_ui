@@ -1,6 +1,6 @@
 #pragma once
 
-#include "moth_ui/iimage.h"
+#include "moth_ui/graphics/iimage.h"
 
 #include <filesystem>
 #include <memory>

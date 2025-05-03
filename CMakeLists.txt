@@ -21,7 +21,6 @@ set(PUBLIC_HEADERS
 	include/moth_ui/animation/animation_track.h
 	include/moth_ui/animation/clip_controller.h
 	include/moth_ui/animation/keyframe.h
-	include/moth_ui/blend_mode.h
 	include/moth_ui/context.h
 	include/moth_ui/events/event_animation.h
 	include/moth_ui/events/event_dispatch.h
@@ -30,13 +29,15 @@ set(PUBLIC_HEADERS
 	include/moth_ui/events/event_listener.h
 	include/moth_ui/events/event_mouse.h
 	include/moth_ui/font_factory.h
+	include/moth_ui/graphics/blend_mode.h
+	include/moth_ui/graphics/ifont.h
+	include/moth_ui/graphics/iimage.h
+	include/moth_ui/graphics/image_scale_type.h
+	include/moth_ui/graphics/irenderer.h
+	include/moth_ui/graphics/itarget.h
+	include/moth_ui/graphics/text_alignment.h
 	include/moth_ui/ifont_factory.h
-	include/moth_ui/ifont.h
 	include/moth_ui/iimage_factory.h
-	include/moth_ui/iimage.h
-	include/moth_ui/image_scale_type.h
-	include/moth_ui/irenderer.h
-	include/moth_ui/itarget.h
 	include/moth_ui/layers/layer.h
 	include/moth_ui/layers/layer_stack.h
 	include/moth_ui/layout/layout_cache.h
@@ -58,7 +59,6 @@ set(PUBLIC_HEADERS
 	include/moth_ui/nodes/node_rect.h
 	include/moth_ui/nodes/node_text.h
 	include/moth_ui/nodes/widget.h
-	include/moth_ui/text_alignment.h
 	include/moth_ui/ui_fwd.h
 	include/moth_ui/utils/color.h
 	include/moth_ui/utils/interp.h

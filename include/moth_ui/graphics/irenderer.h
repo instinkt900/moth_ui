@@ -1,12 +1,12 @@
 #pragma once
 
-#include "moth_ui/utils/rect.h"
-#include "moth_ui/iimage.h"
-#include "moth_ui/ifont.h"
+#include "moth_ui/graphics/blend_mode.h"
+#include "moth_ui/graphics/ifont.h"
+#include "moth_ui/graphics/iimage.h"
+#include "moth_ui/graphics/image_scale_type.h"
+#include "moth_ui/graphics/text_alignment.h"
 #include "moth_ui/utils/color.h"
-#include "moth_ui/blend_mode.h"
-#include "moth_ui/text_alignment.h"
-#include "moth_ui/image_scale_type.h"
+#include "moth_ui/utils/rect.h"
 
 #include <string>
 

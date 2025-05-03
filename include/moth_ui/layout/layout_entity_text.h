@@ -1,10 +1,9 @@
 #pragma once
 
+#include "moth_ui/graphics/text_alignment.h"
 #include "moth_ui/layout/layout_entity.h"
-#include "moth_ui/text_alignment.h"
 
 #include <nlohmann/json_fwd.hpp>
-
 #include <string>
 #include <memory>
 

@@ -1,7 +1,7 @@
 #pragma once
 
+#include "moth_ui/graphics/image_scale_type.h"
 #include "moth_ui/nodes/node.h"
-#include "moth_ui/image_scale_type.h"
 
 #include <memory>
 

@@ -1,9 +1,9 @@
 #pragma once
 
+#include "moth_ui/graphics/image_scale_type.h"
 #include "moth_ui/layout/layout_entity.h"
-#include "moth_ui/image_scale_type.h"
-#include "moth_ui/utils/rect.h"
 #include "moth_ui/layout/layout_rect.h"
+#include "moth_ui/utils/rect.h"
 
 #include <nlohmann/json_fwd.hpp>
 

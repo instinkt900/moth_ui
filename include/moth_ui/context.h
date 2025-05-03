@@ -1,8 +1,8 @@
 #pragma once
 
-#include "iimage_factory.h"
-#include "ifont_factory.h"
-#include "irenderer.h"
+#include "moth_ui/graphics/irenderer.h"
+#include "moth_ui/ifont_factory.h"
+#include "moth_ui/iimage_factory.h"
 
 #include <cassert>
 
