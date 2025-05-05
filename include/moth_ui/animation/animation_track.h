@@ -2,7 +2,7 @@
 
 #include "moth_ui/ui_fwd.h"
 
-#include <nlohmann/json_fwd.hpp>
+#include <nlohmann/json.hpp>
 #include <array>
 #include <functional>
 #include <memory>
@@ -44,7 +44,6 @@ namespace moth_ui {
             Target::ColorAlpha,
         };
 
-        AnimationTrack() = default;
         AnimationTrack(AnimationTrack const& other);
         explicit AnimationTrack(Target target);
         AnimationTrack(Target target, float initialValue);
@@ -67,6 +66,7 @@ namespace moth_ui {
         friend void to_json(nlohmann::json& j, AnimationTrack const& track);
         friend void from_json(nlohmann::json const& j, AnimationTrack& track);
 
+        AnimationTrack() = default;
         AnimationTrack(AnimationTrack&& other) = default;
         AnimationTrack& operator=(AnimationTrack const&) = default;
         AnimationTrack& operator=(AnimationTrack&&) = default;
