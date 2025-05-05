@@ -38,6 +38,8 @@ namespace moth_ui {
 
     LayoutEntity::LayoutEntity(LayoutEntity const& other)
         : m_id(other.m_id)
+        , m_class(other.m_class)
+        , m_parent(nullptr)
         , m_visible(other.m_visible)
         , m_blend(other.m_blend) {
         if (other.m_hardReference) {

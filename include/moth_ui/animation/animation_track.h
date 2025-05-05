@@ -5,6 +5,8 @@
 #include <nlohmann/json_fwd.hpp>
 #include <array>
 #include <functional>
+#include <memory>
+#include <vector>
 
 namespace moth_ui {
     class AnimationTrack {
