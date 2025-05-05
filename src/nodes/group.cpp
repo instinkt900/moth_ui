@@ -18,9 +18,6 @@ namespace moth_ui {
         ReloadEntityPrivate();
     }
 
-    Group::~Group() {
-    }
-
     bool Group::SendEventDown(Event const& event) {
         // disabled/visible checks?
 

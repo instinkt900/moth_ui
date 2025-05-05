@@ -9,6 +9,10 @@ namespace moth_ui {
     public:
         NodeClip(Context& context);
         NodeClip(Context& context, std::shared_ptr<LayoutEntityClip> layoutEntity);
-        virtual ~NodeClip();
+        NodeClip(NodeClip const& other) = delete;
+        NodeClip(NodeClip&& other) = default;
+        NodeClip& operator=(NodeClip const&) = delete;
+        NodeClip& operator=(NodeClip&&) = delete;
+        ~NodeClip() override = default;
     };
 }

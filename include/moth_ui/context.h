@@ -14,6 +14,11 @@ namespace moth_ui {
                 IRenderer* renderer);
         ~Context() = default;
 
+        Context(Context const&) = default;
+        Context(Context&&) = default;
+        Context& operator=(Context const&) = default;
+        Context& operator=(Context&&) = default;
+
         IImageFactory& GetImageFactory() const {
             assert(m_imageFactory && "No image factory?");
             return *m_imageFactory;

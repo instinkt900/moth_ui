@@ -23,6 +23,12 @@ namespace moth_ui {
 
         std::filesystem::path m_layoutPath;
 
+        LayoutEntityRef(LayoutEntityRef const& other) = default;
+        LayoutEntityRef(LayoutEntityRef&& other) = default;
+        LayoutEntityRef& operator=(LayoutEntityRef const&) = default;
+        LayoutEntityRef& operator=(LayoutEntityRef&&) = default;
+        ~LayoutEntityRef() override = default;
+
     private:
         void CopyLayout(Layout const& other);
     };

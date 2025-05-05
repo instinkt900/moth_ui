@@ -22,7 +22,12 @@ namespace moth_ui {
     public:
         Event(int type)
             : m_type(type) {}
-        virtual ~Event() {}
+
+        Event(Event const&) = default;
+        Event(Event&&) = default;
+        Event& operator=(Event const&) = default;
+        Event& operator=(Event&&) = default;
+        virtual ~Event() = default;
 
         int GetType() const { return m_type; }
         virtual std::unique_ptr<Event> Clone() const = 0;

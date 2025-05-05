@@ -10,13 +10,13 @@ namespace moth_ui {
         : m_context(context) {
     }
 
+    Node::~Node() = default;
+
     Node::Node(Context& context, std::shared_ptr<LayoutEntity> layoutEntity)
         : m_context(context)
         , m_layout(layoutEntity) {
+            // TODO: This needs rethinking.
         ReloadEntityInternal();
-    }
-
-    Node::~Node() {
     }
 
     bool Node::SendEvent(Event const& event, EventDirection direction) {

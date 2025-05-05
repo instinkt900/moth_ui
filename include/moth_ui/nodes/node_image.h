@@ -10,7 +10,11 @@ namespace moth_ui {
     public:
         NodeImage(Context& context);
         NodeImage(Context& context, std::shared_ptr<LayoutEntityImage> layoutEntity);
-        virtual ~NodeImage();
+        NodeImage(NodeImage const& other) = delete;
+        NodeImage(NodeImage&& other) = default;
+        NodeImage& operator=(NodeImage const&) = delete;
+        NodeImage& operator=(NodeImage&&) = delete;
+        ~NodeImage() override = default;
 
         void UpdateChildBounds() override;
 

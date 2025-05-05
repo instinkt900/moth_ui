@@ -9,6 +9,8 @@
 namespace moth_ui {
     class AnimationTrack {
     public:
+        using KeyframeList = std::vector<std::shared_ptr<Keyframe>>;
+
         enum class Target {
             Unknown,
             TopOffset,
@@ -48,6 +50,7 @@ namespace moth_ui {
 
         Target GetTarget() const { return m_target; }
 
+        KeyframeList& Keyframes() { return m_keyframes; }
         Keyframe* GetKeyframe(int frameNo);
         Keyframe& GetOrCreateKeyframe(int frameNo);
         void DeleteKeyframe(int frameNo);
@@ -62,9 +65,13 @@ namespace moth_ui {
         friend void to_json(nlohmann::json& j, AnimationTrack const& track);
         friend void from_json(nlohmann::json const& j, AnimationTrack& track);
 
-        std::vector<std::shared_ptr<Keyframe>> m_keyframes;
+        AnimationTrack(AnimationTrack&& other) = default;
+        AnimationTrack& operator=(AnimationTrack const&) = default;
+        AnimationTrack& operator=(AnimationTrack&&) = default;
+        ~AnimationTrack() = default;
 
     private:
         Target m_target = Target::Unknown;
+        KeyframeList m_keyframes;
     };
 }

@@ -10,6 +10,12 @@ namespace moth_ui {
         void SetClip(AnimationClip* clip);
         void Update(float deltaSeconds);
 
+        AnimationClipController(AnimationClipController const&) = default;
+        AnimationClipController(AnimationClipController&&) = default;
+        AnimationClipController& operator=(AnimationClipController const&) = default;
+        AnimationClipController& operator=(AnimationClipController&&) = default;
+        ~AnimationClipController() = default;
+
     private:
         Group* m_group;
         AnimationClip* m_clip = nullptr;

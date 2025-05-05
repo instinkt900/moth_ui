@@ -29,7 +29,14 @@ namespace moth_ui {
         float m_imageScale = 1.0f;
 
         // 9slice only
-        IntRect m_sourceBorders = { { 15, 15 }, { 15, 15 } };
+        static int constexpr DefaultBorderSize = 15;
+        IntRect m_sourceBorders = { { DefaultBorderSize, DefaultBorderSize }, { DefaultBorderSize, DefaultBorderSize } };
         LayoutRect m_targetBorders = MakeDefaultLayoutRect();
+
+        LayoutEntityImage(LayoutEntityImage const& other) = default;
+        LayoutEntityImage(LayoutEntityImage&& other) = default;
+        LayoutEntityImage& operator=(LayoutEntityImage const&) = default;
+        LayoutEntityImage& operator=(LayoutEntityImage&&) = default;
+        ~LayoutEntityImage() override = default;
     };
 }

@@ -14,9 +14,6 @@ namespace moth_ui {
         ReloadEntityPrivate();
     }
 
-    NodeImage::~NodeImage() {
-    }
-
     void NodeImage::UpdateChildBounds() {
         Slice();
     }

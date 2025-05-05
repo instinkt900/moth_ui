@@ -8,6 +8,10 @@
 namespace moth_ui {
     class IImageFactory {
     public:
+        IImageFactory(IImageFactory const&) = default;
+        IImageFactory(IImageFactory&&) = default;
+        IImageFactory& operator=(IImageFactory const&) = default;
+        IImageFactory& operator=(IImageFactory&&) = default;
         virtual ~IImageFactory() = default;
 
         virtual void FlushCache() = 0;

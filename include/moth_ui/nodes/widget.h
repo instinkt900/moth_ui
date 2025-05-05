@@ -15,6 +15,12 @@ namespace moth_ui {
             (void)s_widgetIsRegistered_;
         }
 
+        Widget(Widget const& other) = delete;
+        Widget(Widget&& other) = default;
+        Widget& operator=(Widget const&) = delete;
+        Widget& operator=(Widget&&) = delete;
+        ~Widget() override = default;
+
         static bool SelfRegister() {
             NodeFactory::Get().RegisterWidget(T::ClassName, [](Context& context, auto entity) -> std::unique_ptr<Group> { return std::make_unique<T>(context, entity); });
             return true;

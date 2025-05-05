@@ -14,7 +14,11 @@ namespace moth_ui {
     public:
         Node(Context& context);
         Node(Context& context, std::shared_ptr<LayoutEntity> layoutEntity);
-        virtual ~Node();
+        Node(Node const& other) = delete;
+        Node(Node&& other) = default;
+        Node& operator=(Node const&) = delete;
+        Node& operator=(Node&&) = delete;
+        ~Node() override;
 
         enum class EventDirection {
             Up,
@@ -24,7 +28,7 @@ namespace moth_ui {
         bool SendEventUp(Event const& event);
         virtual bool SendEventDown(Event const& event);
 
-        virtual bool OnEvent(Event const& event) override;
+        bool OnEvent(Event const& event) override;
         virtual void Update(uint32_t ticks);
         virtual void Draw();
 

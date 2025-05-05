@@ -13,9 +13,6 @@ namespace moth_ui {
         ReloadEntityPrivate();
     }
 
-    NodeRect::~NodeRect() {
-    }
-
     void NodeRect::ReloadEntityInternal() {
         Node::ReloadEntityInternal();
         ReloadEntityPrivate();

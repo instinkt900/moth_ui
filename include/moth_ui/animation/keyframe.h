@@ -1,14 +1,12 @@
 #pragma once
 
-#include "moth_ui/utils/interp.h"
 #include "moth_ui/ui_fwd.h"
+#include "moth_ui/utils/interp.h"
 
 #include <nlohmann/json_fwd.hpp>
 
 namespace moth_ui {
-    class Keyframe {
-    public:
-        Keyframe() = default;
+    struct Keyframe {
         Keyframe(int frame, KeyframeValue value)
             : m_frame(frame)
             , m_value(value) {}
@@ -19,5 +17,12 @@ namespace moth_ui {
 
         friend void to_json(nlohmann::json& j, Keyframe const& keyframe);
         friend void from_json(nlohmann::json const& j, Keyframe& keyframe);
+
+        Keyframe() = default;
+        Keyframe(Keyframe const&) = default;
+        Keyframe(Keyframe&&) = default;
+        Keyframe& operator=(Keyframe const&) = default;
+        Keyframe& operator=(Keyframe&&) = default;
+        ~Keyframe() = default;
     };
 }

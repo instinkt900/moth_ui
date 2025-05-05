@@ -11,6 +11,12 @@ namespace moth_ui {
         EventDispatch(Event const& event)
             : m_event(event) {}
 
+        EventDispatch(EventDispatch const&) = delete;
+        EventDispatch(EventDispatch&&) = delete;
+        EventDispatch& operator=(EventDispatch const&) = delete;
+        EventDispatch& operator=(EventDispatch&&) = delete;
+        ~EventDispatch() = default;
+
         bool GetHandled() const { return m_handled; }
 
         void Dispatch(EventListener* listener) {

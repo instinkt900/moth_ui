@@ -1,8 +1,7 @@
 #pragma once
 
+#include "moth_ui/ui_fwd.h"
 #include "moth_ui/graphics/blend_mode.h"
-#include "moth_ui/graphics/ifont.h"
-#include "moth_ui/graphics/iimage.h"
 #include "moth_ui/graphics/image_scale_type.h"
 #include "moth_ui/graphics/text_alignment.h"
 #include "moth_ui/utils/color.h"
@@ -13,8 +12,6 @@
 namespace moth_ui {
     class IRenderer {
     public:
-        virtual ~IRenderer() = default;
-
         virtual void PushBlendMode(BlendMode mode) = 0;
         virtual void PopBlendMode() = 0;
         virtual void PushColor(Color const& color) = 0;
@@ -29,5 +26,11 @@ namespace moth_ui {
         virtual void RenderText(std::string const& text, IFont& font, TextHorizAlignment horizontalAlignment, TextVertAlignment verticalAlignment, IntRect const& destRect) = 0;
 
         virtual void SetRendererLogicalSize(moth_ui::IntVec2 const& size) = 0;
+
+        IRenderer(IRenderer const&) = default;
+        IRenderer(IRenderer&&) = default;
+        IRenderer& operator=(IRenderer const&) = default;
+        IRenderer& operator=(IRenderer&&) = default;
+        virtual ~IRenderer() = default;
     };
 }

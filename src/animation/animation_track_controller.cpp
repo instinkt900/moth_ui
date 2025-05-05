@@ -7,6 +7,10 @@ namespace moth_ui {
         , m_track(track) {
     }
 
+    AnimationTrack::Target AnimationTrackController::GetTarget() const {
+        return m_track.GetTarget();
+    }
+
     void AnimationTrackController::SetFrame(float frame) {
         m_target = m_track.GetValueAtFrame(frame);
     }

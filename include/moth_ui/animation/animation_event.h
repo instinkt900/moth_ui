@@ -8,7 +8,6 @@
 namespace moth_ui {
     class AnimationEvent {
     public:
-        AnimationEvent() = default;
         AnimationEvent(int frame, std::string const& name)
             : m_frame(frame)
             , m_name(name) {}
@@ -26,5 +25,12 @@ namespace moth_ui {
 
         friend void to_json(nlohmann::json& j, AnimationEvent const& event);
         friend void from_json(nlohmann::json const& j, AnimationEvent& event);
+
+        AnimationEvent() = default;
+        AnimationEvent(AnimationEvent const&) = default;
+        AnimationEvent(AnimationEvent&&) = default;
+        AnimationEvent& operator=(AnimationEvent const&) = default;
+        AnimationEvent& operator=(AnimationEvent&&) = default;
+        ~AnimationEvent() = default;
     };
 }
