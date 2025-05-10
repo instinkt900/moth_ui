@@ -3,7 +3,12 @@ Checks: >
   # clang-analyzer-*, 
   # modernize-*, 
   # performance-*, 
-  # readability-*,
+  readability-*,
+  -readability-uppercase-literal-suffix,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -readability-identifier-length,
+  -cppcoreguidelines-avoid-const-or-ref-data-members,
+  -cppcoreguidelines-pro-type-union-access,
   # misc-include-cleaner
 WarningsAsErrors: '*'
 HeaderFilterRegex: '.*'

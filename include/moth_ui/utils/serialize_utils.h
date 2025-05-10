@@ -1,5 +1,6 @@
 #pragma once
 
+#include <magic_enum.hpp>
 #include <memory>
 #include <nlohmann/json.hpp>
 

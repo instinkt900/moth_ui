@@ -23,8 +23,8 @@ namespace moth_ui {
             return !(*this == other);
         }
 
-        friend void to_json(nlohmann::json& j, AnimationEvent const& event);
-        friend void from_json(nlohmann::json const& j, AnimationEvent& event);
+        friend void to_json(nlohmann::json& json, AnimationEvent const& event);
+        friend void from_json(nlohmann::json const& json, AnimationEvent& event);
 
         AnimationEvent() = default;
         AnimationEvent(AnimationEvent const&) = default;

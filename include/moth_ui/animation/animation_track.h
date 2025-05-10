@@ -63,8 +63,8 @@ namespace moth_ui {
 
         void SortKeyframes();
 
-        friend void to_json(nlohmann::json& j, AnimationTrack const& track);
-        friend void from_json(nlohmann::json const& j, AnimationTrack& track);
+        friend void to_json(nlohmann::json& json, AnimationTrack const& track);
+        friend void from_json(nlohmann::json const& json, AnimationTrack& track);
 
         AnimationTrack() = default;
         AnimationTrack(AnimationTrack&& other) = default;

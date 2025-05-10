@@ -35,7 +35,7 @@ namespace moth_ui {
         EventMouseDown& operator=(EventMouseDown&&) = default;
         ~EventMouseDown() override {}
 
-    public:
+    private:
         MouseButton m_button;
         IntVec2 m_position;
     };
@@ -62,7 +62,7 @@ namespace moth_ui {
         EventMouseUp& operator=(EventMouseUp&&) = default;
         ~EventMouseUp() override {}
 
-    public:
+    private:
         MouseButton m_button;
         IntVec2 m_position;
     };
@@ -89,7 +89,7 @@ namespace moth_ui {
         EventMouseMove& operator=(EventMouseMove&&) = default;
         ~EventMouseMove() override {}
 
-    public:
+    private:
         IntVec2 m_position;
         FloatVec2 m_delta;
     };
@@ -114,7 +114,7 @@ namespace moth_ui {
         EventMouseWheel& operator=(EventMouseWheel&&) = default;
         ~EventMouseWheel() override {}
 
-    public:
+    private:
         IntVec2 m_delta;
     };
 }

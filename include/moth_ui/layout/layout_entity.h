@@ -34,7 +34,7 @@ namespace moth_ui {
 
         struct SerializeContext {
             int m_version = 1;
-            std::filesystem::path m_rootPath{};
+            std::filesystem::path m_rootPath;
         };
 
         virtual nlohmann::json Serialize(SerializeContext const& context) const;

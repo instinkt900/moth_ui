@@ -15,8 +15,8 @@ namespace moth_ui {
         KeyframeValue m_value = 0;
         InterpType m_interpType = InterpType::Linear;
 
-        friend void to_json(nlohmann::json& j, Keyframe const& keyframe);
-        friend void from_json(nlohmann::json const& j, Keyframe& keyframe);
+        friend void to_json(nlohmann::json& json, Keyframe const& keyframe);
+        friend void from_json(nlohmann::json const& json, Keyframe& keyframe);
 
         Keyframe() = default;
         Keyframe(Keyframe const&) = default;

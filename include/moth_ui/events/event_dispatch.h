@@ -20,17 +20,19 @@ namespace moth_ui {
         bool GetHandled() const { return m_handled; }
 
         void Dispatch(EventListener* listener) {
-            if (m_handled)
+            if (m_handled) {
                 return;
-            if (listener && listener->OnEvent(m_event)) {
+            }
+            if ((listener != nullptr) && listener->OnEvent(m_event)) {
                 m_handled = true;
             }
         }
 
         template <typename T, typename E>
         void Dispatch(T* obj, bool (T::*func)(E const& event)) {
-            if (m_handled)
+            if (m_handled) {
                 return;
+            }
             if (auto specificEvent = event_cast<E>(m_event)) {
                 if (std::invoke(func, obj, *specificEvent)) {
                     m_handled = true;
