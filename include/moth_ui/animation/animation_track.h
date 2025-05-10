@@ -48,6 +48,7 @@ namespace moth_ui {
         explicit AnimationTrack(Target target);
         AnimationTrack(Target target, float initialValue);
         explicit AnimationTrack(nlohmann::json const& json);
+        AnimationTrack& operator=(AnimationTrack const&);
 
         Target GetTarget() const { return m_target; }
 
@@ -68,7 +69,6 @@ namespace moth_ui {
 
         AnimationTrack() = default;
         AnimationTrack(AnimationTrack&& other) = default;
-        AnimationTrack& operator=(AnimationTrack const&) = default;
         AnimationTrack& operator=(AnimationTrack&&) = default;
         ~AnimationTrack() = default;
 

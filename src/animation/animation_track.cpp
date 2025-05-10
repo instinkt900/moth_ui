@@ -28,6 +28,16 @@ namespace moth_ui {
         }
     }
 
+    AnimationTrack& AnimationTrack::operator=(AnimationTrack const& other) {
+        if (this != &other) {
+            m_keyframes.clear();
+            for (auto&& keyframe : other.m_keyframes) {
+                m_keyframes.push_back(std::make_shared<Keyframe>(*keyframe));
+            }
+        }
+        return *this;
+    }
+
     AnimationTrack::AnimationTrack(Target target)
         : m_target(target) {
     }
