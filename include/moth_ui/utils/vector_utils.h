@@ -37,6 +37,7 @@ namespace moth_ui {
 
     template <typename T, int Dim>
     inline Vector<T, Dim> Normalized(Vector<T, Dim> const& vec) {
+        assert(Length(vec) > 0);
         return vec / Length(vec);
     }
 
@@ -51,5 +52,15 @@ namespace moth_ui {
         result.data[1] = sinTheta * vec.data[0] + cosTheta * vec.data[1];
 
         return result;
+    }
+
+    template <typename T, int Dim>
+    inline Vector<T, Dim> Translate(Vector<T, Dim> const& vec, Vector<T, Dim> translation) {
+        return vec + translation;
+    }
+
+    template <typename T>
+    inline T Angle(Vector<T, 2> const& a, Vector<T, 2> const& b) {
+        return std::atan2((a.x * b.y) - (a.y * b.x), (a.x * b.x) + (a.y * b.y));
     }
 }

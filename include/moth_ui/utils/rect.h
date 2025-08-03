@@ -8,6 +8,14 @@ namespace moth_ui {
         Vector<T, 2> topLeft;
         Vector<T, 2> bottomRight;
 
+        Rect()
+            : topLeft{}
+            , bottomRight{} {}
+
+        Rect(Vector<T, 2> const& tl, Vector<T, 2> const& br)
+            : topLeft(tl)
+            , bottomRight(br) {}
+
         T x() const { return topLeft.x; }
         T y() const { return topLeft.y; }
         T w() const { return bottomRight.x - topLeft.x; }
