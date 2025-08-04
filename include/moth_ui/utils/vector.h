@@ -185,9 +185,9 @@ namespace moth_ui {
     }
 
     template <typename T, int Dim>
-    inline Vector<T, Dim> operator*(T scaler, Vector<T, Dim> const& vec) {
+    inline Vector<T, Dim> operator*(T other, Vector<T, Dim> const& vec) {
         auto ret = vec;
-        ret *= scaler;
+        ret *= other;
         return ret;
     }
 
