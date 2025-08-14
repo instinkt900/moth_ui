@@ -17,7 +17,7 @@ namespace moth_ui {
         // Preferred: array form [x, y, (z, w...)]
         if (j.is_array()) {
             if (j.size() != static_cast<std::size_t>(Dim)) {
-                throw nlohmann::json::type_error::create(302, "Vector: expected JSON array of size Dim");
+                throw std::runtime_error("Vector: expected JSON array of size " + std::to_string(Dim));
             }
             for (int i = 0; i < Dim; ++i) {
                 j.at(static_cast<std::size_t>(i)).get_to(vec.data[i]); // bounds-checked
@@ -26,13 +26,12 @@ namespace moth_ui {
         }
         // Backward-compat: accept object form with x/y(/z/w) keys for up to 4D
         if (j.is_object() && Dim <= 4) {
-            static constexpr const char* keys[4] = {"x", "y", "z", "w"};
+            static constexpr const char* keys[4] = { "x", "y", "z", "w" };
             for (int i = 0; i < Dim; ++i) {
                 j.at(keys[i]).get_to(vec.data[i]); // throws if key missing
             }
             return;
         }
-        throw nlohmann::json::type_error::create(302, "Vector: expected JSON array or {x,y[,z[,w]]} object");
-    }
+        throw std::runtime_error("Vector: expected JSON array or {x,y[,z[,w]]} object");
     }
 }
