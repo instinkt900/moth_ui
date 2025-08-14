@@ -14,8 +14,25 @@ namespace moth_ui {
 
     template <typename T, int Dim>
     inline void from_json(nlohmann::json const& j, Vector<T, Dim>& vec) {
-        for (int i = 0; i < Dim; ++i) {
-            j[i].get_to(vec.data[i]);
+        // Preferred: array form [x, y, (z, w...)]
+        if (j.is_array()) {
+            if (j.size() != static_cast<std::size_t>(Dim)) {
+                throw nlohmann::json::type_error::create(302, "Vector: expected JSON array of size Dim");
+            }
+            for (int i = 0; i < Dim; ++i) {
+                j.at(static_cast<std::size_t>(i)).get_to(vec.data[i]); // bounds-checked
+            }
+            return;
         }
+        // Backward-compat: accept object form with x/y(/z/w) keys for up to 4D
+        if (j.is_object() && Dim <= 4) {
+            static constexpr const char* keys[4] = {"x", "y", "z", "w"};
+            for (int i = 0; i < Dim; ++i) {
+                j.at(keys[i]).get_to(vec.data[i]); // throws if key missing
+            }
+            return;
+        }
+        throw nlohmann::json::type_error::create(302, "Vector: expected JSON array or {x,y[,z[,w]]} object");
+    }
     }
 }
