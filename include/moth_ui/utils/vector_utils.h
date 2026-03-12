@@ -1,6 +1,7 @@
 #pragma once
 
 #include "moth_ui/utils/vector.h"
+#include <cassert>
 #include <cmath>
 
 namespace moth_ui {
