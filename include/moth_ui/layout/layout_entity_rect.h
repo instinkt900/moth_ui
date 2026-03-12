@@ -36,7 +36,7 @@ namespace moth_ui {
 
         LayoutEntityRect(LayoutEntityRect const& other) = default;
         LayoutEntityRect(LayoutEntityRect&& other) = default;
-        LayoutEntityRect& operator=(LayoutEntityRect const&) = default;
+        LayoutEntityRect& operator=(LayoutEntityRect const&) = delete;
         LayoutEntityRect& operator=(LayoutEntityRect&&) = default;
         ~LayoutEntityRect() override = default;
     };

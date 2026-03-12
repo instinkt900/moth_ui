@@ -31,6 +31,9 @@ namespace moth_ui {
      */
     inline Color Normalize(Color const& color) {
         auto const maxComponent = std::max({ color.r, color.g, color.b, color.a });
+        if (maxComponent <= 0.0f) {
+            return color;
+        }
         auto const factor = 1.0f / maxComponent;
         return color * factor;
     }

@@ -37,7 +37,7 @@ namespace moth_ui {
         std::vector<std::shared_ptr<AnimationClip>> m_clips;   ///< Named animation clips for this group.
         std::vector<std::unique_ptr<AnimationEvent>> m_events; ///< Frame-triggered animation event markers.
 
-        LayoutEntityGroup& operator=(LayoutEntityGroup const&) = default;
+        LayoutEntityGroup& operator=(LayoutEntityGroup const&) = delete;
         LayoutEntityGroup& operator=(LayoutEntityGroup&&) = default;
         ~LayoutEntityGroup() override;
     };

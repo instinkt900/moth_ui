@@ -68,6 +68,9 @@ TEST_CASE("All easing functions return 0 at t=0 and 1 at t=1", "[interp][boundar
     check(easeBounceIn,    "easeBounceIn");
     check(easeBounceOut,   "easeBounceOut");
     check(easeBounceInOut, "easeBounceInOut");
+    check(easeBackIn,      "easeBackIn");
+    check(easeBackOut,     "easeBackOut");
+    check(easeBackInOut,   "easeBackInOut");
 }
 
 TEST_CASE("In and Out ease functions are complements", "[interp][symmetry]") {

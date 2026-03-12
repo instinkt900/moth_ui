@@ -57,7 +57,7 @@ namespace moth_ui {
 
         LayoutEntityImage(LayoutEntityImage const& other) = default;
         LayoutEntityImage(LayoutEntityImage&& other) = default;
-        LayoutEntityImage& operator=(LayoutEntityImage const&) = default;
+        LayoutEntityImage& operator=(LayoutEntityImage const&) = delete;
         LayoutEntityImage& operator=(LayoutEntityImage&&) = default;
         ~LayoutEntityImage() override = default;
     };

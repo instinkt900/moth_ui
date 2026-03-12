@@ -1,4 +1,5 @@
 #include "mock_context.h"
+#include "moth_ui/nodes/node_clip.h"
 #include "moth_ui/nodes/node_rect.h"
 #include "moth_ui/nodes/node_text.h"
 #include "moth_ui/nodes/node_image.h"
@@ -11,6 +12,32 @@
 #include <memory>
 
 using namespace moth_ui;
+
+// ---- AnimationController always valid ---------------------------------------
+
+TEST_CASE("NodeRect default constructor provides a valid AnimationController", "[node][animation][rect]") {
+    MockContext mc;
+    auto node = std::make_shared<NodeRect>(mc.context);
+    REQUIRE_NOTHROW(node->GetAnimationController());
+}
+
+TEST_CASE("NodeText default constructor provides a valid AnimationController", "[node][animation][text]") {
+    MockContext mc;
+    auto node = std::make_shared<NodeText>(mc.context);
+    REQUIRE_NOTHROW(node->GetAnimationController());
+}
+
+TEST_CASE("NodeImage default constructor provides a valid AnimationController", "[node][animation][image]") {
+    MockContext mc;
+    auto node = std::make_shared<NodeImage>(mc.context);
+    REQUIRE_NOTHROW(node->GetAnimationController());
+}
+
+TEST_CASE("NodeClip default constructor provides a valid AnimationController", "[node][animation][clip]") {
+    MockContext mc;
+    auto node = std::make_shared<NodeClip>(mc.context);
+    REQUIRE_NOTHROW(node->GetAnimationController());
+}
 
 // ---- NodeRect ---------------------------------------------------------------
 

@@ -153,6 +153,26 @@ namespace moth_ui {
         return a;
     }
 
+    /// @brief Offsets all corners of @p a by scalar @p b in place.
+    template <typename T>
+    inline Rect<T>& operator+=(Rect<T>& a, T b) {
+        a.topLeft.x += b;
+        a.topLeft.y += b;
+        a.bottomRight.x += b;
+        a.bottomRight.y += b;
+        return a;
+    }
+
+    /// @brief Offsets all corners of @p a by @c -b in place.
+    template <typename T>
+    inline Rect<T>& operator-=(Rect<T>& a, T b) {
+        a.topLeft.x -= b;
+        a.topLeft.y -= b;
+        a.bottomRight.x -= b;
+        a.bottomRight.y -= b;
+        return a;
+    }
+
     /// @brief Returns @p rect offset by scalar @p other added to every corner.
     template <typename T>
     inline Rect<T> operator+(Rect<T> const& rect, T other) {

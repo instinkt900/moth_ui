@@ -54,7 +54,7 @@ namespace moth_ui {
 
         LayoutEntityText(LayoutEntityText const& other) = default;
         LayoutEntityText(LayoutEntityText&& other) = default;
-        LayoutEntityText& operator=(LayoutEntityText const&) = default;
+        LayoutEntityText& operator=(LayoutEntityText const&) = delete;
         LayoutEntityText& operator=(LayoutEntityText&&) = default;
         ~LayoutEntityText() override = default;
     };

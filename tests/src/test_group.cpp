@@ -6,6 +6,18 @@
 
 using namespace moth_ui;
 
+TEST_CASE("Group default constructor allows Update without crashing", "[group][animation]") {
+    MockContext mc;
+    auto group = std::make_shared<Group>(mc.context);
+    REQUIRE_NOTHROW(group->Update(16));
+}
+
+TEST_CASE("Group default constructor provides a valid AnimationClipController", "[group][animation]") {
+    MockContext mc;
+    auto group = std::make_shared<Group>(mc.context);
+    REQUIRE_NOTHROW(group->StopAnimation());
+}
+
 TEST_CASE("Group default child count is zero", "[group][children]") {
     MockContext mc;
     auto group = std::make_shared<Group>(mc.context);

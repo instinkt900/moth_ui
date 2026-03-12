@@ -43,7 +43,7 @@ namespace moth_ui {
 
         LayoutEntityRef(LayoutEntityRef const& other) = default;
         LayoutEntityRef(LayoutEntityRef&& other) = default;
-        LayoutEntityRef& operator=(LayoutEntityRef const&) = default;
+        LayoutEntityRef& operator=(LayoutEntityRef const&) = delete;
         LayoutEntityRef& operator=(LayoutEntityRef&&) = default;
         ~LayoutEntityRef() override = default;
 

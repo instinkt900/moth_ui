@@ -60,7 +60,7 @@ namespace moth_ui {
 
         Layout(Layout const&) = default;
         Layout(Layout&&) = default;
-        Layout& operator=(Layout const&) = default;
+        Layout& operator=(Layout const&) = delete;
         Layout& operator=(Layout&&) = default;
         ~Layout() override = default;
 

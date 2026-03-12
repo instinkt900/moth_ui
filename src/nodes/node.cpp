@@ -8,6 +8,7 @@
 namespace moth_ui {
     Node::Node(Context& context)
         : m_context(context) {
+        m_animationController = std::make_unique<AnimationController>(this);
     }
 
     Node::~Node() = default;

@@ -123,7 +123,7 @@ namespace moth_ui {
         std::map<AnimationTrack::Target, std::unique_ptr<AnimationTrack>> m_tracks; ///< Per-property keyframe tracks.
         std::shared_ptr<LayoutEntity> m_hardReference; ///< Immutable source data used to compute overrides for sublayout refs.
 
-        LayoutEntity& operator=(LayoutEntity const&) = default;
+        LayoutEntity& operator=(LayoutEntity const&) = delete;
         LayoutEntity& operator=(LayoutEntity&&) = default;
         virtual ~LayoutEntity() = default;
 

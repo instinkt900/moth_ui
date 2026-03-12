@@ -11,6 +11,7 @@
 namespace moth_ui {
     Group::Group(Context& context)
         : Node(context) {
+        m_animationClipController = std::make_unique<AnimationClipController>(this);
     }
 
     Group::Group(Context& context, std::shared_ptr<LayoutEntityGroup> layoutEntityGroup)

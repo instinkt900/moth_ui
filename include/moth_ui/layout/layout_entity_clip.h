@@ -32,7 +32,7 @@ namespace moth_ui {
 
         LayoutEntityClip(LayoutEntityClip const& other) = default;
         LayoutEntityClip(LayoutEntityClip&& other) = default;
-        LayoutEntityClip& operator=(LayoutEntityClip const&) = default;
+        LayoutEntityClip& operator=(LayoutEntityClip const&) = delete;
         LayoutEntityClip& operator=(LayoutEntityClip&&) = default;
         ~LayoutEntityClip() override = default;
     };

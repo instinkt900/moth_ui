@@ -48,8 +48,10 @@ namespace {
 namespace moth_ui {
     AnimationController::AnimationController(Node* node)
         : m_node(node) {
-        for (auto&& [target, track] : node->GetLayoutEntity()->m_tracks) {
-            m_trackControllers.push_back(std::make_unique<AnimationTrackController>(GetTargetReference(node, target), *track));
+        if (auto const layout = node->GetLayoutEntity()) {
+            for (auto&& [target, track] : layout->m_tracks) {
+                m_trackControllers.push_back(std::make_unique<AnimationTrackController>(GetTargetReference(node, target), *track));
+            }
         }
     }
 
