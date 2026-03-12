@@ -34,6 +34,7 @@ namespace {
             return node->GetColor().b;
         case AnimationTrack::Target::ColorAlpha:
             return node->GetColor().a;
+        case AnimationTrack::Target::Events:
         case AnimationTrack::Target::Unknown:
             break;
         }
@@ -50,6 +51,10 @@ namespace moth_ui {
         : m_node(node) {
         if (auto const layout = node->GetLayoutEntity()) {
             for (auto&& [target, track] : layout->m_tracks) {
+                auto const& continuous = AnimationTrack::ContinuousTargets;
+                if (std::find(continuous.begin(), continuous.end(), target) == continuous.end()) {
+                    continue;
+                }
                 m_trackControllers.push_back(std::make_unique<AnimationTrackController>(GetTargetReference(node, target), *track));
             }
         }
