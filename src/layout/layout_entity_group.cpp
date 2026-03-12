@@ -18,7 +18,7 @@ namespace moth_ui {
             m_children.push_back(child->Clone(moth_ui::LayoutEntity::CloneType::Deep));
         }
         for (auto&& clip : other.m_clips) {
-            m_clips.push_back(std::make_unique<AnimationClip>(*clip));
+            m_clips.push_back(std::make_shared<AnimationClip>(*clip));
         }
         for (auto&& event : other.m_events) {
             m_events.push_back(std::make_unique<AnimationEvent>(*event));
@@ -31,7 +31,7 @@ namespace moth_ui {
             m_children.push_back(child->Clone(moth_ui::LayoutEntity::CloneType::Deep));
         }
         for (auto&& clip : other.m_clips) {
-            m_clips.push_back(std::make_unique<AnimationClip>(*clip));
+            m_clips.push_back(std::make_shared<AnimationClip>(*clip));
         }
         for (auto&& event : other.m_events) {
             m_events.push_back(std::make_unique<AnimationEvent>(*event));
