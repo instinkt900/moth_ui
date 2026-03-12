@@ -52,7 +52,7 @@ namespace moth_ui {
          * @param path Destination path.
          * @return @c true on success.
          */
-        bool Save(std::filesystem::path const& path);
+        bool Save(std::filesystem::path const& path) const;
 
         static int const Version;            ///< Current file format version.
         static std::string const Extension;  ///< File extension without the leading dot.

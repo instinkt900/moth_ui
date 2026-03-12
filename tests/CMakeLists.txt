@@ -23,6 +23,7 @@ set(SOURCES
     src/test_event_dispatch.cpp
     src/test_node.cpp
     src/test_group.cpp
+    src/test_layout_serialization.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
