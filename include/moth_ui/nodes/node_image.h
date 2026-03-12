@@ -6,9 +6,24 @@
 #include <memory>
 
 namespace moth_ui {
+    /**
+     * @brief A Node that renders an image with configurable scale type.
+     *
+     * Supports stretch, tile, and nine-slice rendering modes.
+     */
     class NodeImage : public Node {
     public:
+        /**
+         * @brief Constructs a NodeImage with no layout entity.
+         * @param context Active rendering context.
+         */
         NodeImage(Context& context);
+
+        /**
+         * @brief Constructs a NodeImage from a serialised layout entity.
+         * @param context      Active rendering context.
+         * @param layoutEntity Deserialised image description.
+         */
         NodeImage(Context& context, std::shared_ptr<LayoutEntityImage> layoutEntity);
         NodeImage(NodeImage const& other) = delete;
         NodeImage(NodeImage&& other) = default;
@@ -18,15 +33,37 @@ namespace moth_ui {
 
         void UpdateChildBounds() override;
 
+        /**
+         * @brief Loads an image from a file path.
+         * @param path Path to the image file.
+         */
         void Load(std::filesystem::path const& path);
 
+        /// @brief Returns the currently loaded image, or @c nullptr.
         IImage const* GetImage() const { return m_image.get(); }
 
+        /// @brief Returns a mutable reference to the source sampling rectangle.
         IntRect& GetSourceRect() { return m_sourceRect; }
+
+        /**
+         * @brief Returns the four source slice points used in nine-slice rendering.
+         * @return Pointer to an array of four IntVec2 values, or @c nullptr.
+         */
         IntVec2 const* GetSourceSlices() const { return m_sourceSlices; }
+
+        /**
+         * @brief Returns the four destination slice points used in nine-slice rendering.
+         * @return Pointer to an array of four IntVec2 values, or @c nullptr.
+         */
         IntVec2 const* GetTargetSlices() const { return m_targetSlices; }
 
+        /// @brief Returns the current image scale type.
         ImageScaleType GetImageScaleType() const { return m_imageScaleType; }
+
+        /**
+         * @brief Sets the image scale type.
+         * @param type Scale type to use when rendering.
+         */
         void SetImageScaleType(ImageScaleType type) { m_imageScaleType = type; }
 
     protected:
