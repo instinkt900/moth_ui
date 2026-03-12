@@ -22,6 +22,7 @@ set(SOURCES
     src/test_layout_rect.cpp
     src/test_event_dispatch.cpp
     src/test_node.cpp
+    src/test_node_entity.cpp
     src/test_group.cpp
     src/test_layout_serialization.cpp
 )

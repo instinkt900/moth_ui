@@ -39,7 +39,7 @@ namespace moth_ui {
         }
 
         if (!resultNode) {
-            resultNode = std::unique_ptr<Group>(static_cast<Group*>(group->Instantiate(context).release()));
+            resultNode = std::unique_ptr<Group>(dynamic_cast<Group*>(group->Instantiate(context).release()));
         }
 
         return resultNode;

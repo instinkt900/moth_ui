@@ -49,16 +49,19 @@ namespace moth_ui {
          * @brief Returns the four source slice points used in nine-slice rendering.
          * @return Pointer to an array of four IntVec2 values, or @c nullptr.
          */
-        IntVec2 const* GetSourceSlices() const { return m_sourceSlices; }
+        IntVec2 const* GetSourceSlices() const { return m_sourceSlices.data(); }
 
         /**
          * @brief Returns the four destination slice points used in nine-slice rendering.
          * @return Pointer to an array of four IntVec2 values, or @c nullptr.
          */
-        IntVec2 const* GetTargetSlices() const { return m_targetSlices; }
+        IntVec2 const* GetTargetSlices() const { return m_targetSlices.data(); }
 
         /// @brief Returns the current image scale type.
         ImageScaleType GetImageScaleType() const { return m_imageScaleType; }
+
+        /// @brief Returns the uniform scale factor used in tile/nine-slice modes.
+        float GetImageScale() const { return m_imageScale; }
 
         /**
          * @brief Sets the image scale type.
@@ -74,8 +77,8 @@ namespace moth_ui {
 
         IntRect m_sourceBorders;
         LayoutRect m_targetBorders;
-        IntVec2 m_sourceSlices[4];
-        IntVec2 m_targetSlices[4];
+        std::array<IntVec2,4> m_sourceSlices;
+        std::array<IntVec2,4> m_targetSlices;
 
         void ReloadEntityInternal() override;
         void DrawInternal() override;

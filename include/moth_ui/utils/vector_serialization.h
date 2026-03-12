@@ -44,9 +44,9 @@ namespace moth_ui {
         }
         // Backward-compat: accept object form with x/y(/z/w) keys for up to 4D
         if (j.is_object() && Dim <= 4) {
-            static constexpr const char* keys[4] = { "x", "y", "z", "w" };
+            static constexpr const std::array keys = { "x", "y", "z", "w" };
             for (int i = 0; i < Dim; ++i) {
-                j.at(keys[i]).get_to(vec.data[i]); // throws if key missing
+                j.at(keys.at(i)).get_to(vec.data[i]); // throws if key missing
             }
             return;
         }

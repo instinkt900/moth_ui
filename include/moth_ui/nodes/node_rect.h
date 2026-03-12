@@ -31,6 +31,9 @@ namespace moth_ui {
         NodeRect& operator=(NodeRect&&) = delete;
         ~NodeRect() override = default;
 
+        /// @brief Returns @c true if the rectangle is drawn filled.
+        bool IsFilled() const { return m_filled; }
+
     protected:
         bool m_filled = true; ///< When @c true, the rectangle is drawn filled; otherwise as an outline.
 

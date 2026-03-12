@@ -10,8 +10,8 @@ namespace moth_ui {
      */
     template <typename T>
     struct Rect {
-        Vector<T, 2> topLeft;      ///< Top-left corner of the rectangle.
-        Vector<T, 2> bottomRight;  ///< Bottom-right corner of the rectangle.
+        Vector<T, 2> topLeft;     ///< Top-left corner of the rectangle.
+        Vector<T, 2> bottomRight; ///< Bottom-right corner of the rectangle.
 
         Rect()
             : topLeft{}
@@ -233,11 +233,8 @@ namespace moth_ui {
      */
     template <typename T, typename U>
     inline bool IsInRect(Vector<T, 2> const& point, Rect<U> const& rect) {
-        if (point.x > rect.bottomRight.x || point.x < rect.topLeft.x ||
-            point.y > rect.bottomRight.y || point.y < rect.topLeft.y) {
-            return false;
-        }
-        return true;
+        return !(point.x > rect.bottomRight.x || point.x < rect.topLeft.x ||
+                 point.y > rect.bottomRight.y || point.y < rect.topLeft.y);
     }
 
     /**

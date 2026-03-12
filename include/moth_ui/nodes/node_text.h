@@ -55,6 +55,18 @@ namespace moth_ui {
         /// @brief Returns the text string currently displayed.
         std::string const& GetText() const { return m_text; }
 
+        /// @brief Returns the horizontal text alignment.
+        TextHorizAlignment GetHorizontalAlignment() const { return m_horizontalAlignment; }
+
+        /// @brief Returns the vertical text alignment.
+        TextVertAlignment GetVerticalAlignment() const { return m_verticalAlignment; }
+
+        /// @brief Returns @c true if a drop-shadow is rendered.
+        bool IsDropShadow() const { return m_dropShadow; }
+
+        /// @brief Returns the drop-shadow pixel offset.
+        IntVec2 const& GetDropShadowOffset() const { return m_dropShadowOffset; }
+
     protected:
         std::shared_ptr<IFont> m_font;
         std::string m_text;

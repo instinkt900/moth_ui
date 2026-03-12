@@ -37,7 +37,8 @@ namespace moth_ui {
 
     void Group::Update(uint32_t ticks) {
         Node::Update(ticks);
-        m_animationClipController->Update(ticks / 1000.0f);
+        //NOLINTNEXTLINE(cppcoreguidelines-avoid-magic-numbers)
+        m_animationClipController->Update(static_cast<float>(ticks) / 1000.0f);
         for (auto&& child : m_children) {
             child->Update(ticks);
         }
@@ -51,7 +52,7 @@ namespace moth_ui {
 
     void Group::AddChild(std::shared_ptr<Node> child, size_t index) {
         if (index != static_cast<size_t>(-1)) {
-            auto it = std::begin(m_children) + index;
+            auto it = std::begin(m_children) + static_cast<int32_t>(index);
             m_children.insert(it, child);
         } else {
             m_children.push_back(child);

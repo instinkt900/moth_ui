@@ -73,7 +73,7 @@ namespace moth_ui {
          * @param json JSON object representing the track.
          */
         explicit AnimationTrack(nlohmann::json const& json);
-        AnimationTrack& operator=(AnimationTrack const&);
+        AnimationTrack& operator=(AnimationTrack const& other);
 
         /// @brief Returns the property this track animates.
         Target GetTarget() const { return m_target; }

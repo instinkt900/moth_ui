@@ -67,7 +67,7 @@ namespace moth_ui {
 
     std::vector<std::string> FontFactory::GetFontNameList() const {
         std::vector<std::string> nameList;
-        for (auto& [fontName, fontPath] : m_fontPaths) {
+        for (auto const& [fontName, fontPath] : m_fontPaths) {
             nameList.push_back(fontName);
         }
         return nameList;

@@ -2,7 +2,10 @@
 
 #include <array>
 
+static_assert(true); // fixing clang-tidy bug for pragma pack. https://stackoverflow.com/questions/72456118/why-does-clang-give-a-warning-unterminated-pragma-pack-push-at-end-of-f
 #pragma pack(push, 1)
+
+//NOLINTBEGIN(cppcoreguidelines-avoid-c-arrays,cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-constant-array-index,cppcoreguidelines-pro-type-member-init)
 
 namespace moth_ui {
     /**
@@ -243,5 +246,7 @@ namespace moth_ui {
     /// @brief Alias for a 2D vector of @c int.
     using IntVec2 = Vector<int, 2>;
 }
+
+//NOLINTEND(cppcoreguidelines-avoid-c-arrays,cppcoreguidelines-pro-type-reinterpret-cast,cppcoreguidelines-pro-bounds-constant-array-index,cppcoreguidelines-pro-type-member-init)
 
 #pragma pack(pop)

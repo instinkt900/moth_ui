@@ -9,6 +9,8 @@
 #include <cmath>
 #include <cstdint>
 
+// NOLINTBEGIN(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+
 namespace moth_ui {
     /// @brief RGBA colour represented as four @c float components in the range [0, 1].
     using Color = Vector<float, 4>;
@@ -60,10 +62,10 @@ namespace moth_ui {
      * @param argb Packed colour as 0xAARRGGBB.
      */
     inline Color FromARGB(uint32_t argb) {
-        uint8_t const a = (argb & 0xFF000000) >> 24;
-        uint8_t const r = (argb & 0x00FF0000) >> 16;
-        uint8_t const g = (argb & 0x0000FF00) >> 8;
-        uint8_t const b = (argb & 0x000000FF);
+        auto const a = static_cast<float>((argb & 0xFF000000) >> 24);
+        auto const r = static_cast<float>((argb & 0x00FF0000) >> 16);
+        auto const g = static_cast<float>((argb & 0x0000FF00) >> 8);
+        auto const b = static_cast<float>(argb & 0x000000FF);
         return Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
     }
 
@@ -72,10 +74,10 @@ namespace moth_ui {
      * @param rgba Packed colour as 0xRRGGBBAA.
      */
     inline Color FromRGBA(uint32_t rgba) {
-        uint8_t const r = (rgba & 0xFF000000) >> 24;
-        uint8_t const g = (rgba & 0x00FF0000) >> 16;
-        uint8_t const b = (rgba & 0x0000FF00) >> 8;
-        uint8_t const a = (rgba & 0x000000FF);
+        auto const r = static_cast<float>((rgba & 0xFF000000) >> 24);
+        auto const g = static_cast<float>((rgba & 0x00FF0000) >> 16);
+        auto const b = static_cast<float>((rgba & 0x0000FF00) >> 8);
+        auto const a = static_cast<float>(rgba & 0x000000FF);
         return Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
     }
 
@@ -173,3 +175,6 @@ namespace moth_ui {
         return finalColor;
     }
 }
+
+// NOLINTEND(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+
