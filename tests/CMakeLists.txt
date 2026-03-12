@@ -34,12 +34,6 @@ if(MSVC)
     target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS _ITERATOR_DEBUG_LEVEL=0)
     target_compile_options(${PROJECT_NAME} PRIVATE /W3 /WX /MD)
     set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/ignore:4099")
-else()
-    # -fpermissive: GCC rejects `const T x;` where T has a defaulted (not
-    # user-provided) default constructor even though VectorData's members have
-    # in-class zero-initializers. This flag downgrades that diagnostic to a
-    # warning so the tests can compile.
-    target_compile_options(${PROJECT_NAME} PRIVATE -fpermissive)
 endif()
 
 include(CTest)

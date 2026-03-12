@@ -73,7 +73,7 @@ namespace moth_ui {
     public:
         using VectorData<T, Dim>::data;
 
-        Vector() = default;
+        Vector() {}
 
         /**
          * @brief Constructs a vector from individual scalar arguments.
