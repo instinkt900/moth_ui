@@ -34,7 +34,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE moth_ui Catch2::Catch2WithMain)
 if(MSVC)
     target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
     target_compile_options(${PROJECT_NAME} PRIVATE /W3 /WX)
-    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/ignore:4099")
+    target_link_options(${PROJECT_NAME} PRIVATE /ignore:4099)
 endif()
 
 include(CTest)

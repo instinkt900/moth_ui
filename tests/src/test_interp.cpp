@@ -1,5 +1,6 @@
 #include "moth_ui/utils/interp.h"
 #include <catch2/catch_all.hpp>
+#include <magic_enum.hpp>
 
 using namespace moth_ui;
 
@@ -83,18 +84,18 @@ TEST_CASE("In and Out ease functions are complements", "[interp][symmetry]") {
 }
 
 TEST_CASE("InterpFuncs map contains all InterpType entries", "[interp][map]") {
-    REQUIRE(InterpFuncs.count(InterpType::Step)        == 1);
-    REQUIRE(InterpFuncs.count(InterpType::Linear)      == 1);
-    REQUIRE(InterpFuncs.count(InterpType::Smooth)      == 1);
-    REQUIRE(InterpFuncs.count(InterpType::SineIn)      == 1);
-    REQUIRE(InterpFuncs.count(InterpType::SineOut)     == 1);
-    REQUIRE(InterpFuncs.count(InterpType::SineInOut)   == 1);
-    REQUIRE(InterpFuncs.count(InterpType::QuadIn)      == 1);
-    REQUIRE(InterpFuncs.count(InterpType::BounceOut)   == 1);
-    REQUIRE(InterpFuncs.count(InterpType::BounceInOut) == 1);
+    // One entry per InterpType enum value
+    REQUIRE(InterpFuncs.size() == magic_enum::enum_count<InterpType>());
+
+    // Every mapped function must be non-null
+    for (auto const& [type, fn] : InterpFuncs) {
+        (void)type;
+        REQUIRE(fn != nullptr);
+    }
+
     // Unknown defaults to linear
-    REQUIRE(InterpFuncs.count(InterpType::Unknown)     == 1);
-    REQUIRE(InterpFuncs.at(InterpType::Unknown)(0.5f)  == Catch::Approx(0.5f));
+    REQUIRE(InterpFuncs.count(InterpType::Unknown)    == 1);
+    REQUIRE(InterpFuncs.at(InterpType::Unknown)(0.5f) == Catch::Approx(0.5f));
 }
 
 TEST_CASE("Interp<float> linear interpolation", "[interp][interp_template]") {
