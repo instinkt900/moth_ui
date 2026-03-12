@@ -1,5 +1,7 @@
 #pragma once
 
+// NOLINTBEGIN
+
 #include <map>
 
 #undef M_PI
@@ -255,7 +257,7 @@ namespace moth_ui {
     }
 
     typedef float (*EaseFunction)(float);
-    static std::map<InterpType, EaseFunction> const InterpFuncs{
+    inline std::map<InterpType, EaseFunction> const InterpFuncs{
         { InterpType::Step, easeStep },
         { InterpType::Linear, easeLinear },
         { InterpType::Smooth, easeSmooth },
@@ -289,6 +291,8 @@ namespace moth_ui {
         { InterpType::BounceIn, easeBounceIn },
         { InterpType::BounceOut, easeBounceOut },
         { InterpType::BounceInOut, easeBounceInOut },
+        // Unknown types default to linear.
+        { InterpType::Unknown, easeLinear },
     };
 
     template <typename T>
@@ -297,3 +301,4 @@ namespace moth_ui {
         return (t == 0.0f) ? a : (t == 1.0f) ? b : (a + (b - a) * interpFunc(t));
     }
 }
+// NOLINTEND

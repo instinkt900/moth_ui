@@ -31,7 +31,7 @@ namespace moth_ui {
         int GetWindowHeight() const { return m_windowHeight; }
 
         void SetEventListener(EventListener* listener) { m_eventListener = listener; }
-        void BroadcastEvent(Event const& event);
+        void FireEvent(Event const& event);
 
         LayerStack(LayerStack const&) = delete;
         LayerStack(LayerStack&&) = delete;

@@ -39,7 +39,6 @@ namespace moth_ui {
     LayoutEntity::LayoutEntity(LayoutEntity const& other)
         : m_id(other.m_id)
         , m_class(other.m_class)
-        , m_parent(nullptr)
         , m_visible(other.m_visible)
         , m_blend(other.m_blend) {
         if (other.m_hardReference) {
@@ -137,8 +136,6 @@ namespace moth_ui {
     }
 
     bool LayoutEntity::Deserialize(nlohmann::json const& json, SerializeContext const& context) {
-        assert(json["type"] == GetType());
-
         bool success = false;
         if (json["type"] == GetType()) {
             m_id = json.value("id", "");
@@ -155,6 +152,8 @@ namespace moth_ui {
                 }
             }
             success = true;
+        } else {
+            assert(false && "Type mismatch in LayoutEntity::Deserialize");
         }
 
         return success;

@@ -39,6 +39,7 @@ namespace {
         }
 
         // just a value dump for unknown targets
+        assert(false && "AnimationController: unknown track target");
         static float dummy = 0;
         return dummy;
     }

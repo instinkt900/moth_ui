@@ -14,7 +14,7 @@ namespace moth_ui {
 
     void AnimationClipController::SetClip(AnimationClip* clip) {
         m_clip = clip;
-        if (m_clip) {
+        if (m_clip != nullptr) {
             m_frame = static_cast<float>(m_clip->m_startFrame);
             for (auto& child : m_group->GetChildren()) {
                 child->GetAnimationController().SetFrame(m_frame);
@@ -24,7 +24,7 @@ namespace moth_ui {
     }
 
     void AnimationClipController::Update(float deltaSeconds) {
-        if (m_clip) {
+        if (m_clip != nullptr) {
             struct Span {
                 float Start = 0;
                 float End = 0;
@@ -54,7 +54,7 @@ namespace moth_ui {
                     break;
                 case AnimationClip::LoopType::Loop:
                     eventChecks[0].Set(oldFrame, static_cast<float>(m_clip->m_endFrame));
-                    m_frame -= static_cast<float>(m_clip->FrameCount());
+                    m_frame -= static_cast<float>(m_clip->m_endFrame - m_clip->m_startFrame);
                     eventChecks[1].Set(static_cast<float>(m_clip->m_startFrame), m_frame);
                     break;
                 case AnimationClip::LoopType::Reset:

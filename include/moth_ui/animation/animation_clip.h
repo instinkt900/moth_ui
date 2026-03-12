@@ -18,7 +18,7 @@ namespace moth_ui {
         float m_fps = DefaultFPS;
         LoopType m_loopType = LoopType::Stop;
 
-        int FrameCount() const { return m_endFrame - m_startFrame; }
+        int FrameCount() const { return m_endFrame - m_startFrame + 1; }
 
         bool operator==(AnimationClip const& other) const {
             return m_name == other.m_name && m_startFrame == other.m_startFrame && m_endFrame == other.m_endFrame && m_fps == other.m_fps && m_loopType == other.m_loopType;

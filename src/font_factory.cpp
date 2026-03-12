@@ -59,6 +59,9 @@ namespace moth_ui {
     }
 
     std::shared_ptr<moth_ui::IFont> FontFactory::GetDefaultFont(int size) {
+        if (m_fontPaths.empty()) {
+            return nullptr;
+        }
         return GetFont(m_fontPaths.begin()->first, size);
     }
 
