@@ -2,6 +2,7 @@
 
 // NOLINTBEGIN
 
+#include <cassert>
 #include <map>
 
 #undef M_PI
@@ -333,7 +334,7 @@ namespace moth_ui {
         { InterpType::BounceIn, easeBounceIn },
         { InterpType::BounceOut, easeBounceOut },
         { InterpType::BounceInOut, easeBounceInOut },
-        // Unknown types default to linear.
+        // Unknown types default to linear in release.
         { InterpType::Unknown, easeLinear },
     };
 
@@ -347,6 +348,7 @@ namespace moth_ui {
      */
     template <typename T>
     T Interp(T a, T b, float t, InterpType type) {
+        assert(type != InterpType::Unknown && "Unknown interp type should never be used.");
         auto const interpFunc = InterpFuncs.at(type);
         return (t == 0.0f) ? a : (t == 1.0f) ? b : (a + (b - a) * interpFunc(t));
     }

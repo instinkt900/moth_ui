@@ -10,6 +10,12 @@ namespace moth_ui {
      * AnimationController holds one AnimationTrackController per track.
      * The controller is non-copyable and non-movable because it holds a reference
      * to the output float.
+     *
+     * @note The references bound at construction are assumed to remain valid for
+     * the controller's lifetime. A Node's layout entity is set once at
+     * construction and never replaced — changing it after the fact is considered
+     * a programming error. Given that invariant the AnimationTrack and the node
+     * property float it drives are both stable for the node's lifetime.
      */
     class AnimationTrackController {
     public:

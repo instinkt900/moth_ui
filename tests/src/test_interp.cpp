@@ -110,6 +110,7 @@ TEST_CASE("Interp<float> step holds start value until t==1", "[interp][interp_te
 TEST_CASE("Interp<float> t=0 always returns a, t=1 always returns b", "[interp][interp_template]") {
     for (auto const& [type, fn] : InterpFuncs) {
         (void)fn;
+        if (type == InterpType::Unknown) continue; // Unknown is a programming error; assert fires in debug
         REQUIRE(Interp(1.0f, 9.0f, 0.0f, type) == Catch::Approx(1.0f));
         REQUIRE(Interp(1.0f, 9.0f, 1.0f, type) == Catch::Approx(9.0f));
     }
