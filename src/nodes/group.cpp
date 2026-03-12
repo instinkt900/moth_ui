@@ -82,7 +82,7 @@ namespace moth_ui {
             auto& animationClips = layout->m_clips;
             auto it = ranges::find_if(animationClips, [&name](auto& clip) { return clip->m_name == name; });
             if (std::end(animationClips) != it) {
-                m_animationClipController->SetClip(it->get());
+                m_animationClipController->SetClip(*it);
                 return true;
             }
         }
@@ -130,7 +130,7 @@ namespace moth_ui {
             child->Draw();
         }
 
-        while (clipRects--) {
+        while ((clipRects--) != 0) {
             m_context.GetRenderer().PopClip();
         }
     }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "moth_ui/ui_fwd.h"
+#include <memory>
 
 namespace moth_ui {
     /**
@@ -22,7 +23,7 @@ namespace moth_ui {
          * @brief Sets the active animation clip to play.
          * @param clip Clip to play, or @c nullptr to stop playback.
          */
-        void SetClip(AnimationClip* clip);
+        void SetClip(std::shared_ptr<AnimationClip> clip);
 
         /**
          * @brief Advances the clip by the given time and applies the new frame.
@@ -38,7 +39,7 @@ namespace moth_ui {
 
     private:
         Group* m_group;
-        AnimationClip* m_clip = nullptr;
+        std::weak_ptr<AnimationClip> m_clip;
         float m_frame = 0.0f;
 
         void CheckEvents(float startFrame, float endFrame);
