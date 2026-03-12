@@ -55,7 +55,7 @@ namespace moth_ui {
          */
         template <typename T, typename E>
         void Dispatch(T* obj, bool (T::*func)(E const& event)) {
-            if (m_handled) {
+            if (m_handled || obj == nullptr) {
                 return;
             }
             if (auto specificEvent = event_cast<E>(m_event)) {
@@ -72,7 +72,7 @@ namespace moth_ui {
          */
         template <typename T>
         void Dispatch(std::function<bool(T const&)> const& func) {
-            if (m_handled) {
+            if (m_handled || !func) {
                 return;
             }
             if (auto specificEvent = event_cast<T>(m_event)) {

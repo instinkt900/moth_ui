@@ -28,9 +28,9 @@ namespace moth_ui {
          */
         void SetFrame(float frame);
 
-        AnimationController(AnimationController const&) = default;
+        AnimationController(AnimationController const&) = delete;
         AnimationController(AnimationController&&) = default;
-        AnimationController& operator=(AnimationController const&) = default;
+        AnimationController& operator=(AnimationController const&) = delete;
         AnimationController& operator=(AnimationController&&) = default;
 
     private:

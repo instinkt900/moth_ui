@@ -25,59 +25,50 @@ namespace moth_ui {
 
     void AnimationClipController::Update(float deltaSeconds) {
         if (auto const clip = m_clip.lock()) {
-            struct Span {
-                float Start = 0;
-                float End = 0;
-                bool IsSet = false;
-                void Set(float start, float end) {
-                    Start = start;
-                    End = end;
-                    IsSet = true;
-                }
-            };
+            auto const clipStart = static_cast<float>(clip->m_startFrame);
+            auto const clipEnd   = static_cast<float>(clip->m_endFrame);
+            auto const clipLen   = clipEnd - clipStart;
 
-            std::array<Span, 2> eventChecks;
-
-            auto const oldFrame = m_frame;
+            auto const startFrame    = m_frame;
             auto const deltaFrames = deltaSeconds * clip->m_fps;
             m_frame += deltaFrames;
 
             bool animationEnded = false;
             std::string const animationName = clip->m_name;
-            if (m_frame >= static_cast<float>(clip->m_endFrame)) {
+
+            if (m_frame >= clipEnd) {
                 switch (clip->m_loopType) {
                 case AnimationClip::LoopType::Stop:
-                    m_frame = static_cast<float>(clip->m_endFrame);
+                    CheckEvents(startFrame, clipEnd);
+                    m_frame = clipEnd;
                     m_clip.reset();
-                    eventChecks[0].Set(oldFrame, m_frame);
                     animationEnded = true;
-                    break;
-                case AnimationClip::LoopType::Loop:
-                    eventChecks[0].Set(oldFrame, static_cast<float>(clip->m_endFrame));
-                    m_frame -= static_cast<float>(clip->m_endFrame - clip->m_startFrame);
-                    eventChecks[1].Set(static_cast<float>(clip->m_startFrame), m_frame);
                     break;
                 case AnimationClip::LoopType::Reset:
-                    eventChecks[0].Set(oldFrame, static_cast<float>(clip->m_endFrame));
-                    m_frame = static_cast<float>(clip->m_startFrame);
+                    CheckEvents(startFrame, clipEnd);
+                    m_frame = clipStart;
                     m_clip.reset();
                     animationEnded = true;
                     break;
+                case AnimationClip::LoopType::Loop: {
+                    // Iterate across every complete loop so no events are skipped.
+                    float spanStart = startFrame;
+                    while (clipLen > 0.0f && m_frame >= clipEnd) {
+                        CheckEvents(spanStart, clipEnd);
+                        m_frame -= clipLen;
+                        spanStart = clipStart;
+                    }
+                    CheckEvents(spanStart, m_frame);
+                    break;
+                }
                 }
             } else {
-                eventChecks[0].Set(oldFrame, m_frame);
+                CheckEvents(startFrame, m_frame);
             }
 
-            // update each tracks time
+            // update each track's time to the final frame position
             for (auto& child : m_group->GetChildren()) {
                 child->GetAnimationController().SetFrame(m_frame);
-            }
-
-            // check for events over spans
-            for (auto&& check : eventChecks) {
-                if (check.IsSet) {
-                    CheckEvents(check.Start, check.End);
-                }
             }
 
             if (animationEnded) {

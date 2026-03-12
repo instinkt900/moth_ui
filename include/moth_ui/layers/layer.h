@@ -51,10 +51,10 @@ namespace moth_ui {
         virtual bool UseRenderSize() const { return false; }
 
         Layer() = default;
-        Layer(Layer const&) = default;
-        Layer(Layer&&) = default;
-        Layer& operator=(Layer const&) = default;
-        Layer& operator=(Layer&&) = default;
+        Layer(Layer const&) = delete;
+        Layer(Layer&&) = delete;
+        Layer& operator=(Layer const&) = delete;
+        Layer& operator=(Layer&&) = delete;
         ~Layer() override = default;
 
     protected:

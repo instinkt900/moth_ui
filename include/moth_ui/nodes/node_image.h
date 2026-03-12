@@ -3,6 +3,8 @@
 #include "moth_ui/graphics/image_scale_type.h"
 #include "moth_ui/nodes/node.h"
 
+#include <array>
+#include <filesystem>
 #include <memory>
 
 namespace moth_ui {

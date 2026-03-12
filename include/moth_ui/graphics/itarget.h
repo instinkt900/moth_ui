@@ -21,6 +21,7 @@ namespace moth_ui {
          */
         virtual IImage* GetImage() = 0;
 
+        ITarget() = default;
         ITarget(ITarget const&) = default;
         ITarget(ITarget&&) = default;
         ITarget& operator=(ITarget const&) = default;

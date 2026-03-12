@@ -16,10 +16,10 @@ namespace moth_ui {
      */
     class NodeFactory {
     public:
-        NodeFactory(NodeFactory const&) = default;
-        NodeFactory(NodeFactory&&) = default;
-        NodeFactory& operator=(NodeFactory const&) = default;
-        NodeFactory& operator=(NodeFactory&&) = default;
+        NodeFactory(NodeFactory const&) = delete;
+        NodeFactory(NodeFactory&&) = delete;
+        NodeFactory& operator=(NodeFactory const&) = delete;
+        NodeFactory& operator=(NodeFactory&&) = delete;
         virtual ~NodeFactory() = default;
 
         /// @brief Returns the singleton NodeFactory instance.
