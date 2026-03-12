@@ -75,12 +75,25 @@ TEST_CASE("All easing functions return 0 at t=0 and 1 at t=1", "[interp][boundar
 }
 
 TEST_CASE("In and Out ease functions are complements", "[interp][symmetry]") {
-    // easeXIn(t) == 1 - easeXOut(1 - t)
-    float const t = 0.3f;
-    REQUIRE(easeQuadIn(t)   == Catch::Approx(1.0f - easeQuadOut(1.0f - t)).epsilon(0.001));
-    REQUIRE(easeCubicIn(t)  == Catch::Approx(1.0f - easeCubicOut(1.0f - t)).epsilon(0.001));
-    REQUIRE(easeSineIn(t)   == Catch::Approx(1.0f - easeSineOut(1.0f - t)).epsilon(0.001));
-    REQUIRE(easeExpoIn(t)   == Catch::Approx(1.0f - easeExpoOut(1.0f - t)).epsilon(0.001));
+    // easeXIn(t) == 1 - easeXOut(1 - t) for all t
+    using EasePair = std::pair<float (*)(float), float (*)(float)>;
+    std::initializer_list<EasePair> pairs = {
+        { easeSineIn,    easeSineOut    },
+        { easeQuadIn,    easeQuadOut    },
+        { easeCubicIn,   easeCubicOut   },
+        { easeQuartIn,   easeQuartOut   },
+        { easeQuintIn,   easeQuintOut   },
+        { easeExpoIn,    easeExpoOut    },
+        { easeCircIn,    easeCircOut    },
+        { easeBackIn,    easeBackOut    },
+        { easeElasticIn, easeElasticOut },
+        { easeBounceIn,  easeBounceOut  },
+    };
+    for (float t : { 0.3f, 0.5f, 0.7f }) {
+        for (auto [in, out] : pairs) {
+            REQUIRE(in(t) == Catch::Approx(1.0f - out(1.0f - t)).epsilon(0.001));
+        }
+    }
 }
 
 TEST_CASE("InterpFuncs map contains all InterpType entries", "[interp][map]") {
