@@ -1,7 +1,7 @@
 # Moth UI
 
-![Build Status](https://github.com/instinkt900/moth_ui/actions/workflows/build-lib.yml/badge.svg)
-![Upload Status](https://github.com/instinkt900/moth_ui/actions/workflows/upload-lib.yml/badge.svg)
+[![Build Status](https://github.com/instinkt900/moth_ui/actions/workflows/build-lib.yml/badge.svg)](https://github.com/instinkt900/moth_ui/actions/workflows/build-lib.yml)
+[![Upload Status](https://github.com/instinkt900/moth_ui/actions/workflows/upload-lib.yml/badge.svg)](https://github.com/instinkt900/moth_ui/actions/workflows/upload-lib.yml)
 
 A C++ Flash-like framework for building 2D UIs in graphical applications such as games and media players. It supports keyframed animation, a variety of easing curves, mouse and keyboard events, and custom animation events that let the UI signal back to the application during playback.
 
