@@ -150,7 +150,7 @@ The recommended approach is via Conan. Add moth_ui as a dependency in your `cona
 
 ```ini
 [requires]
-moth_ui/0.3.0
+moth_ui/<<version>>
 ```
 
 Then link against the `moth_ui` target in CMake:
