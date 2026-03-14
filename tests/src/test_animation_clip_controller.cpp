@@ -2,8 +2,7 @@
 #include "moth_ui/animation/animation_clip.h"
 #include "moth_ui/animation/animation_event.h"
 #include "moth_ui/events/event_animation.h"
-#include "moth_ui/layout/layout_entity_group.h"
-#include "moth_ui/layout/layout_rect.h"
+#include "moth_ui/layout/layout.h"
 #include "moth_ui/nodes/group.h"
 #include <catch2/catch_all.hpp>
 #include <memory>
@@ -22,7 +21,7 @@ namespace {
     // the event list.
     struct AnimFixture {
         MockContext mc;
-        std::shared_ptr<LayoutEntityGroup> layout;
+        std::shared_ptr<Layout> layout;
         std::shared_ptr<AnimationClip> clip;
         std::shared_ptr<Group> group;
 
@@ -33,7 +32,7 @@ namespace {
         explicit AnimFixture(int startFrame = 0, int endFrame = kClipEndFrame,
                              AnimationClip::LoopType loopType = AnimationClip::LoopType::Stop,
                              float fps = kTestFps) {
-            layout = std::make_shared<LayoutEntityGroup>(MakeDefaultLayoutRect());
+            layout = std::make_shared<Layout>();
 
             clip = std::make_shared<AnimationClip>();
             clip->m_name = "test";
