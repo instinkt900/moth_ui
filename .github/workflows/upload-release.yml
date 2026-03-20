@@ -65,6 +65,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v2
+      with:
+        version: "18.1.4"
+
     - name: Setup Conan
       uses: conan-io/setup-conan@v1
       with:
@@ -107,6 +112,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v2
+      with:
+        version: "18.1.4"
 
     - name: Setup Conan
       uses: conan-io/setup-conan@v1
