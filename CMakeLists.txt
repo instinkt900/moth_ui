@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" VERSION_STR)
 string(STRIP "${VERSION_STR}" PROJECT_VERSION)
 
-project(moth_ui VERSION ${PROJECT_VERSION} DESCRIPTION "A C++ game UI library")
+project(moth_ui VERSION ${PROJECT_VERSION} DESCRIPTION "A C++ UI library with keyframe animation support for games and interactive applications")
 
 message("Building with CMake version: ${CMAKE_VERSION}")
 
