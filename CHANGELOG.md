@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 Entries are generated automatically from git history using [git-cliff](https://github.com/orhun/git-cliff).
 
+## [1.8.0] - 2026-08-20
+### Features
+- [**breaking**] A layout names an image by an identity, not by a path
+
+### Bug Fixes
+- Construct an AssetId from a literal, and do not load an empty one
+
+### Miscellaneous
+- Bump version to 1.8.0
+
 ## [1.1.3] - 2026-08-10
 ### Bug Fixes
 - Do not run clang-tidy on an MSVC build
