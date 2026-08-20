@@ -30,6 +30,7 @@ set(PUBLIC_HEADERS
 	include/moth_ui/animation/discrete_animation_track.h
 	include/moth_ui/animation/discrete_animation_track_controller.h
 	include/moth_ui/animation/keyframe.h
+	include/moth_ui/asset_id.h
 	include/moth_ui/context.h
 	include/moth_ui/events/event_animation.h
 	include/moth_ui/events/event_dispatch.h

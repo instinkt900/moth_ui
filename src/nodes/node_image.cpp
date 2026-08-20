@@ -18,17 +18,26 @@ namespace moth_ui {
         m_textureFilter = m_typedLayout->m_textureFilter;
         m_sourceBorders = m_typedLayout->m_sourceBorders;
         m_targetBorders = m_typedLayout->m_targetBorders;
-        Load(m_typedLayout->m_imagePath);
+        Load(m_typedLayout->m_imageId);
     }
 
     void NodeImage::UpdateChildBounds() {
         Slice();
     }
 
-    void NodeImage::Load(std::filesystem::path const& path) {
-        m_image = m_context.GetImageFactory().GetImage(path);
+    void NodeImage::Load(AssetId const& id) {
+        // An empty identity names nothing, so there is nothing to ask the factory for.
+        // Asking anyway made every image entity with no identity report a failure to
+        // load "", which is noise rather than a fault. Slice() does nothing without an
+        // image, so returning here leaves the same state.
+        if (id.empty()) {
+            m_image.reset();
+            return;
+        }
+
+        m_image = m_context.GetImageFactory().GetImage(id);
         if (!m_image) {
-            log::warn("NodeImage: failed to load image '{}'", path.string());
+            log::warn("NodeImage: failed to load image '{}'", id.str());
         }
         if (m_image && IsZero(m_sourceRect)) {
             auto const imageDimensions = m_image->GetDimensions();
@@ -46,7 +55,7 @@ namespace moth_ui {
         m_textureFilter = m_typedLayout->m_textureFilter;
         m_sourceBorders = m_typedLayout->m_sourceBorders;
         m_targetBorders = m_typedLayout->m_targetBorders;
-        Load(m_typedLayout->m_imagePath);
+        Load(m_typedLayout->m_imageId);
     }
 
     void NodeImage::DrawInternal() {

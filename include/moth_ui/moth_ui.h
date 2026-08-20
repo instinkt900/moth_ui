@@ -5,6 +5,9 @@
 // utils (must come first — defines json partial specializations used by animation headers)
 #include "moth_ui/utils/serialize_utils.h"
 
+// assets
+#include "moth_ui/asset_id.h"
+
 // animation
 #include "moth_ui/animation/animation_clip.h"
 #include "moth_ui/animation/animation_clip_controller.h"

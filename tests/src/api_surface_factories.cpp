@@ -11,7 +11,7 @@
 using namespace moth_ui;
 
 TEST_CASE("IImageFactory method signatures are stable", "[api][factories][iimage]") {
-    std::unique_ptr<IImage> (IImageFactory::*getImg)(std::filesystem::path const&)
+    std::unique_ptr<IImage> (IImageFactory::*getImg)(AssetId const&)
         = &IImageFactory::GetImage;
     (void)getImg;
     SUCCEED();
