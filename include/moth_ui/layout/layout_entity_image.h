@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/asset_id.h"
 #include "moth_ui/graphics/image_scale_type.h"
 #include "moth_ui/graphics/texture_filter.h"
 #include "moth_ui/layout/layout_entity.h"
@@ -12,7 +13,7 @@ namespace moth_ui {
     /**
      * @brief Layout entity that describes an image node.
      *
-     * Stores the image path, source rectangle, scale type, and nine-slice
+     * Stores the image identity, source rectangle, scale type, and nine-slice
      * border settings used when instantiating a NodeImage.
      */
     class LayoutEntityImage : public LayoutEntity {
@@ -30,11 +31,11 @@ namespace moth_ui {
         explicit LayoutEntityImage(LayoutEntityGroup* parent);
 
         /**
-         * @brief Constructs an image entity with a specific image file.
+         * @brief Constructs an image entity that names a specific image.
          * @param initialBounds Starting layout rect.
-         * @param imagePath     Path to the image file to load.
+         * @param imageId       Names the image to load.
          */
-        LayoutEntityImage(LayoutRect const& initialBounds, std::filesystem::path const& imagePath);
+        LayoutEntityImage(LayoutRect const& initialBounds, AssetId imageId);
 
         std::shared_ptr<LayoutEntity> Clone(CloneType cloneType) override;
 
@@ -46,7 +47,7 @@ namespace moth_ui {
         nlohmann::json Serialize(SerializeContext const& context) const override;
         bool Deserialize(nlohmann::json const& json, SerializeContext const& context) override;
 
-        std::filesystem::path m_imagePath;                    ///< Path to the image file.
+        AssetId m_imageId;                                    ///< Names the image to load.
         IntRect m_sourceRect;                                 ///< Portion of the image to display.
         ImageScaleType m_imageScaleType = ImageScaleType::Stretch; ///< How the image is scaled.
         float m_imageScale = 1.0f;                            ///< Uniform scale factor for tile/nine-slice modes.

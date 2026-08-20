@@ -18,17 +18,17 @@ namespace moth_ui {
         m_textureFilter = m_typedLayout->m_textureFilter;
         m_sourceBorders = m_typedLayout->m_sourceBorders;
         m_targetBorders = m_typedLayout->m_targetBorders;
-        Load(m_typedLayout->m_imagePath);
+        Load(m_typedLayout->m_imageId);
     }
 
     void NodeImage::UpdateChildBounds() {
         Slice();
     }
 
-    void NodeImage::Load(std::filesystem::path const& path) {
-        m_image = m_context.GetImageFactory().GetImage(path);
+    void NodeImage::Load(AssetId const& id) {
+        m_image = m_context.GetImageFactory().GetImage(id);
         if (!m_image) {
-            log::warn("NodeImage: failed to load image '{}'", path.string());
+            log::warn("NodeImage: failed to load image '{}'", id.str());
         }
         if (m_image && IsZero(m_sourceRect)) {
             auto const imageDimensions = m_image->GetDimensions();
@@ -46,7 +46,7 @@ namespace moth_ui {
         m_textureFilter = m_typedLayout->m_textureFilter;
         m_sourceBorders = m_typedLayout->m_sourceBorders;
         m_targetBorders = m_typedLayout->m_targetBorders;
-        Load(m_typedLayout->m_imagePath);
+        Load(m_typedLayout->m_imageId);
     }
 
     void NodeImage::DrawInternal() {

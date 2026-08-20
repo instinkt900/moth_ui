@@ -26,6 +26,7 @@ set(SOURCES
     src/test_node_entity.cpp
     src/test_group.cpp
     src/test_layout_serialization.cpp
+    src/test_asset_id.cpp
     src/test_animation_clip_controller.cpp
     src/test_transform.cpp
     src/test_node_flipbook.cpp

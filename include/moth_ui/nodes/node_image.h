@@ -1,11 +1,11 @@
 #pragma once
 
+#include "moth_ui/asset_id.h"
 #include "moth_ui/graphics/image_scale_type.h"
 #include "moth_ui/graphics/texture_filter.h"
 #include "moth_ui/nodes/node.h"
 
 #include <array>
-#include <filesystem>
 #include <memory>
 
 namespace moth_ui {
@@ -40,10 +40,10 @@ namespace moth_ui {
         void UpdateChildBounds() override;
 
         /**
-         * @brief Loads an image from a file path.
-         * @param path Path to the image file.
+         * @brief Loads the image that an identity names.
+         * @param id Names the image to load.
          */
-        void Load(std::filesystem::path const& path);
+        void Load(AssetId const& id);
 
         /// @brief Returns the currently loaded image, or @c nullptr.
         IImage const* GetImage() const { return m_image.get(); }

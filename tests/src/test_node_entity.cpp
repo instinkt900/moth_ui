@@ -152,7 +152,7 @@ TEST_CASE("NodeImage reads image scale from LayoutEntityImage on construction", 
 TEST_CASE("NodeImage with missing image path leaves image null", "[node][entity][image]") {
     MockContext mc;
     auto entity = std::make_shared<LayoutEntityImage>(nullptr);
-    // m_imagePath left empty — MockImageFactory returns nullptr
+    // m_imageId left empty — MockImageFactory returns nullptr
 
     auto node = NodeImage::Create(mc.context, entity);
     REQUIRE(node->GetImage() == nullptr);

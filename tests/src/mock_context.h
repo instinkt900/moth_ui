@@ -60,7 +60,7 @@ public:
 
 class MockImageFactory : public moth_ui::IImageFactory {
 public:
-    std::unique_ptr<moth_ui::IImage> GetImage(std::filesystem::path const&) override { return nullptr; }
+    std::unique_ptr<moth_ui::IImage> GetImage(moth_ui::AssetId const&) override { return nullptr; }
 };
 
 class MockFontFactory : public moth_ui::IFontFactory {

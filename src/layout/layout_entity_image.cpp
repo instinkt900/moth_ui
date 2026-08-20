@@ -12,9 +12,9 @@ namespace moth_ui {
         : LayoutEntity(parent) {
     }
 
-    LayoutEntityImage::LayoutEntityImage(LayoutRect const& initialBounds, std::filesystem::path const& imagePath)
+    LayoutEntityImage::LayoutEntityImage(LayoutRect const& initialBounds, AssetId imageId)
         : LayoutEntity(initialBounds)
-        , m_imagePath(imagePath) {
+        , m_imageId(std::move(imageId)) {
     }
 
     std::shared_ptr<LayoutEntity> LayoutEntityImage::Clone(CloneType cloneType) {
@@ -28,8 +28,10 @@ namespace moth_ui {
     nlohmann::json LayoutEntityImage::Serialize(SerializeContext const& context) const {
         nlohmann::json j = LayoutEntity::Serialize(context);
 
-        auto const relativePath = std::filesystem::relative(m_imagePath, context.m_rootPath);
-        j["imagePath"] = relativePath.string();
+        // The identity is written exactly as it was given. moth_ui used to make this
+        // path relative here and absolute again on the way back in, which meant a
+        // consumer could not store anything that was not a path. See AssetId.
+        j["imagePath"] = m_imageId.str();
         j["sourceRect"] = m_sourceRect;
         j["imageScaleType"] = m_imageScaleType;
         j["imageScale"] = m_imageScale;
@@ -50,8 +52,7 @@ namespace moth_ui {
             m_textureFilter = (rawFilter == TextureFilter::Invalid) ? TextureFilter::Linear : rawFilter;
             m_sourceBorders = json.value("sourceBorders", IntRect{});
             m_targetBorders = json.value("targetBorders", MakeDefaultLayoutRect());
-            std::string relativePath = json.value("imagePath", "");
-            m_imagePath = std::filesystem::absolute(context.m_rootPath / relativePath);
+            m_imageId = AssetId{ json.value("imagePath", std::string{}) };
         }
 
         return success;
