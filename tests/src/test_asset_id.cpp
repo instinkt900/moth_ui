@@ -39,6 +39,23 @@ TEST_CASE("AssetId carries a value that is not a path at all", "[asset_id]") {
     REQUIRE(guid.str() == "8f14e45f-ea8f-4b6d-9c1e-2a3b4c5d6e7f");
 }
 
+TEST_CASE("AssetId is constructible from a string literal", "[asset_id]") {
+    // Without a char const* overload this line does not compile at all: a literal
+    // converts to std::string and to std::filesystem::path equally well, so the two
+    // constructors are ambiguous. That made the most natural spelling the broken one.
+    AssetId const id{ "ui/panel.png" };
+    REQUIRE(id.str() == "ui/panel.png");
+}
+
+TEST_CASE("A literal and a std::string give the same identity", "[asset_id]") {
+    REQUIRE(AssetId{ "ui/panel.png" } == AssetId{ std::string{ "ui/panel.png" } });
+}
+
+TEST_CASE("AssetId from a null pointer names nothing", "[asset_id]") {
+    AssetId const id{ static_cast<char const*>(nullptr) };
+    REQUIRE(id.empty());
+}
+
 TEST_CASE("AssetId compares by value", "[asset_id]") {
     AssetId const a{ std::string{ "ui/panel.png" } };
     AssetId const b{ std::string{ "ui/panel.png" } };

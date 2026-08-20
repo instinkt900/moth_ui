@@ -40,6 +40,19 @@ namespace moth_ui {
         }
 
         /**
+         * @brief Constructs an identity from a string literal.
+         *
+         * Without this overload, @c AssetId{"ui/icon"} is ambiguous. A string literal
+         * converts to @c std::string and to @c std::filesystem::path equally well, and
+         * neither wins. So the most natural spelling was the one that did not compile.
+         *
+         * @param value The identity, stored as given. A null pointer names nothing.
+         */
+        explicit AssetId(char const* value)
+            : m_value(value != nullptr ? value : "") {
+        }
+
+        /**
          * @brief Constructs an identity from a path.
          *
          * The path is stored as it arrives. This applies no normalizing of any kind, so

@@ -60,7 +60,14 @@ public:
 
 class MockImageFactory : public moth_ui::IImageFactory {
 public:
-    std::unique_ptr<moth_ui::IImage> GetImage(moth_ui::AssetId const&) override { return nullptr; }
+    std::unique_ptr<moth_ui::IImage> GetImage(moth_ui::AssetId const& id) override {
+        ++getImageCalls;
+        lastRequested = id;
+        return nullptr;
+    }
+
+    int getImageCalls = 0;
+    moth_ui::AssetId lastRequested;
 };
 
 class MockFontFactory : public moth_ui::IFontFactory {

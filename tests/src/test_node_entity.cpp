@@ -156,4 +156,8 @@ TEST_CASE("NodeImage with missing image path leaves image null", "[node][entity]
 
     auto node = NodeImage::Create(mc.context, entity);
     REQUIRE(node->GetImage() == nullptr);
+
+    // An empty identity names nothing, so the factory is never asked. Asking anyway
+    // made every image entity with no identity report a failure to load "".
+    REQUIRE(mc.imageFactory.getImageCalls == 0);
 }

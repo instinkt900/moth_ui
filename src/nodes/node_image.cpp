@@ -26,6 +26,15 @@ namespace moth_ui {
     }
 
     void NodeImage::Load(AssetId const& id) {
+        // An empty identity names nothing, so there is nothing to ask the factory for.
+        // Asking anyway made every image entity with no identity report a failure to
+        // load "", which is noise rather than a fault. Slice() does nothing without an
+        // image, so returning here leaves the same state.
+        if (id.empty()) {
+            m_image.reset();
+            return;
+        }
+
         m_image = m_context.GetImageFactory().GetImage(id);
         if (!m_image) {
             log::warn("NodeImage: failed to load image '{}'", id.str());
