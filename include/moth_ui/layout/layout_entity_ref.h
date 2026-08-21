@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moth_ui/asset_id.h"
 #include "moth_ui/layout/layout_entity_group.h"
 #include "moth_ui/moth_ui_fwd.h"
 
@@ -41,7 +42,15 @@ namespace moth_ui {
         nlohmann::json Serialize(SerializeContext const& context) const override;
         bool Deserialize(nlohmann::json const& json, SerializeContext const& context) override;
 
-        std::filesystem::path m_layoutPath; ///< Path to the referenced layout file (relative to the project root).
+        /**
+         * @brief Names the referenced layout.
+         *
+         * A path relative to the project root for a consumer that keeps its layouts
+         * as loose files, which is what this has always held. Anything else for a
+         * consumer that supplies an @ref ILayoutProvider, which decides what an
+         * identity means. See @ref AssetId.
+         */
+        AssetId m_layoutId;
 
         /**
          * @brief Re-applies stored property overrides to a child entity.
@@ -60,6 +69,12 @@ namespace moth_ui {
 
     private:
         void CopyLayout(Layout const& other);
+
+        /// Reads the referenced layout, through the provider or off the filesystem.
+        std::shared_ptr<Layout> LoadTarget(SerializeContext const& context) const;
+
+        /// Applies the per-child overrides this ref stores, and keeps them for reload.
+        void ApplyOverrides(nlohmann::json const& json);
 
         /// Serialised override JSON per child index, retained from Deserialize for re-application.
         std::map<int, std::string> m_childOverrides;

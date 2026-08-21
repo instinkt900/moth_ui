@@ -97,6 +97,7 @@ namespace moth_ui {
         struct SerializeContext {
             int m_version = 1;               ///< File format version.
             std::filesystem::path m_rootPath; ///< Root directory used to resolve relative paths.
+            ILayoutProvider* m_layoutProvider = nullptr; ///< Reads a referenced layout. Null reads the filesystem instead.
         };
 
         /**
