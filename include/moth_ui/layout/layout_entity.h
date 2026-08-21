@@ -143,4 +143,19 @@ namespace moth_ui {
     private:
         void InitTracks(LayoutRect const& initialRect);
     };
+
+    /**
+     * @brief Creates and reads back the entity that a piece of layout JSON describes.
+     *
+     * The type comes out of the JSON, so this is what a container calls for each of
+     * its children. A child that names an unknown type, or that will not read back, is
+     * reported and skipped rather than failing the whole container.
+     *
+     * @param json    The serialised entity.
+     * @param parent  The group that will own it.
+     * @param context The version and root path the document was read under.
+     * @return The entity, or @c nullptr when it could not be read.
+     */
+    std::unique_ptr<LayoutEntity> LoadEntity(nlohmann::json const& json, LayoutEntityGroup* parent,
+                                             LayoutEntity::SerializeContext const& context);
 }

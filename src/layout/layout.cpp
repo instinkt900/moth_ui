@@ -13,21 +13,6 @@ namespace moth_ui {
     std::string const Layout::BinaryExtension("mothb");
     std::string const Layout::FullBinaryExtension("." + BinaryExtension);
 
-    std::unique_ptr<LayoutEntity> LoadEntity(nlohmann::json const& json, LayoutEntityGroup* parent, LayoutEntity::SerializeContext const& context) {
-        LayoutEntityType type = json.value("type", LayoutEntityType::Unknown);
-        std::unique_ptr<LayoutEntity> entity = CreateLayoutEntity(type);
-        if (entity) {
-            entity->m_parent = parent;
-            if (entity->Deserialize(json, context)) {
-                return entity;
-            }
-            log::warn("Failed to deserialize child entity of type '{}'", magic_enum::enum_name(type));
-        } else {
-            log::warn("Unknown child entity type '{}'", magic_enum::enum_name(type));
-        }
-        return nullptr;
-    }
-
     Layout::Layout()
         : LayoutEntityGroup(nullptr) {
     }
@@ -44,6 +29,7 @@ namespace moth_ui {
         nlohmann::json j;
         j["mothui_version"] = Version;
         j["type"] = GetType();
+        j["id"] = m_id;
         j["class"] = m_class;
         j["blend"] = m_blend;
         j["clips"] = m_clips;
@@ -67,6 +53,12 @@ namespace moth_ui {
             return false;
         }
 
+        // The id alone out of the LayoutEntity fields. A root has no bounds of
+        // its own, because the screen rectangle is what sizes it, so reading the
+        // whole base would make tracks on a root suddenly apply and move every
+        // layout already authored. A name is what a consumer needs, and it
+        // changes nothing that draws.
+        m_id = json.value("id", "");
         m_class = json.value("class", "");
         m_blend = json.value("blend", BlendMode::Replace);
 

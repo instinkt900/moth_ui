@@ -1,11 +1,14 @@
 #include "moth_ui/layout/layout.h"
 #include "moth_ui/layout/layout_entity_clip.h"
+#include "moth_ui/layout/layout_entity_group.h"
 #include "moth_ui/layout/layout_entity_rect.h"
 #include "moth_ui/layout/layout_entity_text.h"
 #include "moth_ui/layout/layout_rect.h"
 #include "moth_ui/animation/animation_clip.h"
 #include "moth_ui/animation/animation_marker.h"
 #include "moth_ui/graphics/text_alignment.h"
+#include "moth_ui/nodes/group.h"
+#include "mock_context.h"
 #include <catch2/catch_all.hpp>
 #include <nlohmann/json.hpp>
 
@@ -91,6 +94,93 @@ TEST_CASE("Layout::Load sets the loaded path", "[layout][load]") {
 }
 
 // ---- child entity round-trips -----------------------------------------------
+
+TEST_CASE("Layout with LayoutEntityGroup child round-trips", "[layout][serialization]") {
+    // A group child is what lets one layout hold several named widgets. Before
+    // this existed CreateLayoutEntity had no Group case, so the child was
+    // dropped and the layout read back with no children at all.
+    TempFile tmp("moth_group.mothui");
+    auto original = std::make_shared<Layout>();
+
+    auto group = std::make_shared<LayoutEntityGroup>(original.get());
+    group->m_id = "play_button";
+    group->m_class = "button";
+
+    auto label = std::make_shared<LayoutEntityText>(group.get());
+    label->m_id = "play_label";
+    label->m_text = "Play";
+    group->m_children.push_back(label);
+
+    original->m_children.push_back(group);
+    REQUIRE(original->Save(tmp));
+
+    auto [loaded, result] = Layout::Load(tmp);
+    REQUIRE(result == Layout::LoadResult::Success);
+    REQUIRE(loaded->m_children.size() == 1);
+
+    auto const loadedGroup = std::dynamic_pointer_cast<LayoutEntityGroup>(loaded->m_children[0]);
+    REQUIRE(loadedGroup != nullptr);
+    REQUIRE(loadedGroup->GetType() == LayoutEntityType::Group);
+    REQUIRE(loadedGroup->m_id == "play_button");
+    REQUIRE(loadedGroup->m_class == "button");
+
+    REQUIRE(loadedGroup->m_children.size() == 1);
+    REQUIRE(loadedGroup->m_children[0]->m_id == "play_label");
+
+    REQUIRE(jsonEqual(*original, *loaded));
+}
+
+TEST_CASE("Two group children keep their own ids", "[layout][serialization]") {
+    // One button in a layout proves nothing about a menu. This is the shape a
+    // consumer needs: several named widgets that a lookup can tell apart.
+    TempFile tmp("moth_two_groups.mothui");
+    auto original = std::make_shared<Layout>();
+
+    for (auto const& id : { "play", "quit" }) {
+        auto group = std::make_shared<LayoutEntityGroup>(original.get());
+        group->m_id = id;
+        group->m_class = "button";
+        original->m_children.push_back(group);
+    }
+    REQUIRE(original->Save(tmp));
+
+    auto [loaded, result] = Layout::Load(tmp);
+    REQUIRE(result == Layout::LoadResult::Success);
+    REQUIRE(loaded->m_children.size() == 2);
+    REQUIRE(loaded->m_children[0]->m_id == "play");
+    REQUIRE(loaded->m_children[1]->m_id == "quit");
+}
+
+TEST_CASE("A group child instantiates as a Group node that keeps its id",
+          "[layout][serialization]") {
+    MockContext mc;
+    auto layout = std::make_shared<Layout>();
+
+    auto group = std::make_shared<LayoutEntityGroup>(layout.get());
+    group->m_id = "play_button";
+    layout->m_children.push_back(group);
+
+    auto const node = layout->Instantiate(mc.context);
+    REQUIRE(node != nullptr);
+
+    auto const found = node->FindChild("play_button");
+    REQUIRE(found != nullptr);
+    REQUIRE(std::dynamic_pointer_cast<Group>(found) != nullptr);
+}
+
+TEST_CASE("Layout root id round-trips", "[layout][serialization]") {
+    // Layout::Deserialize reads none of the LayoutEntity fields, so an id on
+    // the root used to be written and never read back.
+    TempFile tmp("moth_root_id.mothui");
+    auto original = std::make_shared<Layout>();
+    original->m_id = "main_menu";
+    REQUIRE(original->Save(tmp));
+
+    auto [loaded, result] = Layout::Load(tmp);
+    REQUIRE(result == Layout::LoadResult::Success);
+    REQUIRE(loaded->m_id == "main_menu");
+}
+
 
 TEST_CASE("Layout with LayoutEntityRect child round-trips", "[layout][serialization]") {
     TempFile tmp("moth_rect.mothui");

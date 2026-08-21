@@ -28,11 +28,28 @@ namespace moth_ui {
             return std::make_unique<LayoutEntityFlipbook>(nullptr);
         case LayoutEntityType::Gradient:
             return std::make_unique<LayoutEntityGradient>(nullptr);
+        case LayoutEntityType::Group:
+            return std::make_unique<LayoutEntityGroup>(nullptr);
         default:
             log::error("Unknown layout entity type: {}", magic_enum::enum_name(type));
             assert(false && "unknown entity type");
             return nullptr;
         }
+    }
+
+    std::unique_ptr<LayoutEntity> LoadEntity(nlohmann::json const& json, LayoutEntityGroup* parent, LayoutEntity::SerializeContext const& context) {
+        LayoutEntityType type = json.value("type", LayoutEntityType::Unknown);
+        std::unique_ptr<LayoutEntity> entity = CreateLayoutEntity(type);
+        if (entity) {
+            entity->m_parent = parent;
+            if (entity->Deserialize(json, context)) {
+                return entity;
+            }
+            log::warn("Failed to deserialize child entity of type '{}'", magic_enum::enum_name(type));
+        } else {
+            log::warn("Unknown child entity type '{}'", magic_enum::enum_name(type));
+        }
+        return nullptr;
     }
 
     LayoutEntity::LayoutEntity(LayoutRect const& initialBounds) {

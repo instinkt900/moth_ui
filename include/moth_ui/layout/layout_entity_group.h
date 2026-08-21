@@ -32,6 +32,13 @@ namespace moth_ui {
         /// @brief Returns @c LayoutEntityType::Group.
         LayoutEntityType GetType() const override { return LayoutEntityType::Group; }
 
+        std::shared_ptr<LayoutEntity> Clone(CloneType cloneType) override;
+
+        std::shared_ptr<Node> Instantiate(Context& context) override;
+
+        nlohmann::json Serialize(SerializeContext const& context) const override;
+        bool Deserialize(nlohmann::json const& json, SerializeContext const& context) override;
+
         std::vector<std::shared_ptr<LayoutEntity>> m_children; ///< Ordered child entities.
         std::vector<std::shared_ptr<AnimationClip>> m_clips;   ///< Named animation clips for this group.
         std::vector<std::unique_ptr<AnimationMarker>> m_events; ///< Frame-triggered animation markers.

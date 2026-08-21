@@ -2,6 +2,7 @@
 #include "moth_ui/layout/layout_entity_group.h"
 #include "moth_ui/animation/animation_clip.h"
 #include "moth_ui/animation/animation_marker.h"
+#include "moth_ui/nodes/group.h"
 
 namespace moth_ui {
     LayoutEntityGroup::LayoutEntityGroup(LayoutRect const& initialBounds)
@@ -36,4 +37,50 @@ namespace moth_ui {
     }
 
     LayoutEntityGroup::~LayoutEntityGroup() = default;
+
+    std::shared_ptr<LayoutEntity> LayoutEntityGroup::Clone(CloneType cloneType) {
+        auto const cloned = std::make_shared<LayoutEntityGroup>(*this);
+        if (cloneType == CloneType::Shallow) {
+            // Deep copy and then discard, the way LayoutEntityRef does it. It is
+            // easier than making sure every base class field is copied by hand.
+            cloned->m_children.clear();
+        }
+        return cloned;
+    }
+
+    std::shared_ptr<Node> LayoutEntityGroup::Instantiate(Context& context) {
+        return Group::Create(context, std::static_pointer_cast<LayoutEntityGroup>(shared_from_this()));
+    }
+
+    nlohmann::json LayoutEntityGroup::Serialize(SerializeContext const& context) const {
+        nlohmann::json j = LayoutEntity::Serialize(context);
+        j["clips"] = m_clips;
+        j["events"] = m_events;
+
+        std::vector<nlohmann::json> childJsons;
+        for (auto&& child : m_children) {
+            childJsons.push_back(child->Serialize(context));
+        }
+        j["children"] = childJsons;
+        return j;
+    }
+
+    bool LayoutEntityGroup::Deserialize(nlohmann::json const& json, SerializeContext const& context) {
+        if (!LayoutEntity::Deserialize(json, context)) {
+            return false;
+        }
+
+        m_clips = json.value("clips", decltype(m_clips){});
+        m_events = json.value("events", decltype(m_events){});
+
+        m_children.clear();
+        if (auto const childrenIt = json.find("children"); childrenIt != json.end()) {
+            for (auto&& childJson : *childrenIt) {
+                if (auto child = LoadEntity(childJson, this, context)) {
+                    m_children.push_back(std::move(child));
+                }
+            }
+        }
+        return true;
+    }
 }
