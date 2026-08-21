@@ -1,5 +1,6 @@
 #include "common.h"
 #include "moth_ui/layout/layout_entity_ref.h"
+#include "moth_ui/ilayout_provider.h"
 #include "moth_ui/nodes/group.h"
 #include "moth_ui/layout/layout.h"
 #include "moth_ui/animation/animation_clip.h"
@@ -8,7 +9,7 @@
 namespace moth_ui {
     LayoutEntityRef::LayoutEntityRef(LayoutRect const& initialBounds, Layout const& layoutRef)
         : LayoutEntityGroup(initialBounds)
-        , m_layoutPath(layoutRef.GetLoadedPath()) {
+        , m_layoutId(layoutRef.GetLoadedPath()) {
         CopyLayout(layoutRef);
     }
 
@@ -41,8 +42,15 @@ namespace moth_ui {
         j = LayoutEntity::Serialize(context); // dont save out the group data. children etc
         j["type"] = LayoutEntityType::Ref;    // override the type as a reference
 
-        auto const relativePath = std::filesystem::relative(m_layoutPath, context.m_rootPath);
-        j["layoutPath"] = relativePath.string();
+        // An identity is written as it stands, the way an image reference is. A
+        // path is made relative to the root first, which is what this has always
+        // done: a ref built from a layout somebody loaded carries an absolute
+        // path, and the file has to hold a portable one.
+        std::string stored = m_layoutId.str();
+        if (std::filesystem::path const named{ stored }; named.is_absolute()) {
+            stored = std::filesystem::relative(named, context.m_rootPath).string();
+        }
+        j["layoutPath"] = stored;
 
         nlohmann::json overrides;
         int childIndex = 0;
@@ -61,40 +69,61 @@ namespace moth_ui {
         return j;
     }
 
-    bool LayoutEntityRef::Deserialize(nlohmann::json const& json, SerializeContext const& context) {
-        bool success = LayoutEntity::Deserialize(json, context);
-
-        if (success) {
-            std::string relativePath = json.value("layoutPath", "");
-            m_layoutPath = context.m_rootPath / relativePath;
-            
-            auto [targetLayout, loadResult] = Layout::Load(m_layoutPath);
-            if (loadResult == Layout::LoadResult::Success) {
-                CopyLayout(*targetLayout);
-
-                m_childOverrides.clear();
-                auto overrides = json.value("propertyOverrides", nlohmann::json{});
-                for (auto&& overrideEntry : overrides) {
-                    if (overrideEntry.contains("childIndex") && overrideEntry.contains("type") && overrideEntry.contains("data")) {
-                        auto const childIndex = overrideEntry["childIndex"].get<int>();
-                        if (childIndex >= 0 && childIndex < static_cast<int>(m_children.size())) {
-                            auto const overrideType = overrideEntry["type"];
-                            auto child = m_children[childIndex];
-                            if (child->GetType() == overrideType) {
-                                auto const overrideJson = overrideEntry["data"];
-                                m_childOverrides[childIndex] = overrideJson.dump();
-                                child->DeserializeOverrides(overrideJson);
-                            }
-                        }
-                    }
-                }
-            } else {
-                log::error("Failed to load referenced layout '{}': {}", m_layoutPath.string(), magic_enum::enum_name(loadResult));
-                success = false;
-            }
+    std::shared_ptr<Layout> LayoutEntityRef::LoadTarget(SerializeContext const& context) const {
+        if (context.m_layoutProvider != nullptr) {
+            return context.m_layoutProvider->GetLayout(m_layoutId);
         }
 
-        return success;
+        // No provider, so the identity is a path and the referencing layout came
+        // from a file. The root is the directory that file sat in.
+        auto [loaded, loadResult] = Layout::Load(context.m_rootPath / m_layoutId.path());
+        return loadResult == Layout::LoadResult::Success ? std::move(loaded) : nullptr;
+    }
+
+    void LayoutEntityRef::ApplyOverrides(nlohmann::json const& json) {
+        m_childOverrides.clear();
+
+        auto const overrides = json.value("propertyOverrides", nlohmann::json{});
+        for (auto&& overrideEntry : overrides) {
+            if (!overrideEntry.contains("childIndex") || !overrideEntry.contains("type") || !overrideEntry.contains("data")) {
+                continue;
+            }
+
+            auto const childIndex = overrideEntry["childIndex"].get<int>();
+            if (childIndex < 0 || childIndex >= static_cast<int>(m_children.size())) {
+                continue;
+            }
+
+            auto child = m_children[childIndex];
+            if (child->GetType() != overrideEntry["type"]) {
+                continue;
+            }
+
+            auto const overrideJson = overrideEntry["data"];
+            m_childOverrides[childIndex] = overrideJson.dump();
+            child->DeserializeOverrides(overrideJson);
+        }
+    }
+
+    bool LayoutEntityRef::Deserialize(nlohmann::json const& json, SerializeContext const& context) {
+        if (!LayoutEntity::Deserialize(json, context)) {
+            return false;
+        }
+
+        // The key stays "layoutPath" and the meaning of its value widens, the same
+        // way "imagePath" now holds an identity. An old file therefore still reads,
+        // because a path is a valid identity.
+        m_layoutId = AssetId{ json.value("layoutPath", std::string{}) };
+
+        auto const targetLayout = LoadTarget(context);
+        if (!targetLayout) {
+            log::error("Failed to load referenced layout '{}'", m_layoutId.str());
+            return false;
+        }
+
+        CopyLayout(*targetLayout);
+        ApplyOverrides(json);
+        return true;
     }
 
     // TODO: currently unreachable. The only caller (Node::ReloadEntity) was

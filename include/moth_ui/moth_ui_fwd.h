@@ -83,6 +83,7 @@ namespace moth_ui {
     class LayoutEntityGradient;
     class Layout;
     class LayoutCache;
+    class ILayoutProvider;
     struct LayoutRect;
     struct LinearGradient;
 

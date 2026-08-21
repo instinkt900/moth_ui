@@ -58,8 +58,11 @@ namespace moth_ui {
     }
 
     bool Layout::Deserialize(nlohmann::json const& json, SerializeContext const& context) {
-        SerializeContext loadedContext;
-        loadedContext.m_rootPath = context.m_rootPath;
+        // Copied rather than rebuilt field by field. The version is the one thing
+        // the file decides, and everything else the caller set has to reach the
+        // children. A rebuild dropped the layout provider and every reference
+        // then fell back to reading a file that was not there.
+        SerializeContext loadedContext = context;
         loadedContext.m_version = json.value("mothui_version", 0);
 
         auto const jsonType = json.value("type", LayoutEntityType::Unknown);

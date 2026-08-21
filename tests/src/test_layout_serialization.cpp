@@ -1,11 +1,17 @@
 #include "moth_ui/layout/layout.h"
+#include "moth_ui/ilayout_provider.h"
 #include "moth_ui/layout/layout_entity_clip.h"
+#include "moth_ui/layout/layout_entity_ref.h"
 #include "moth_ui/layout/layout_entity_rect.h"
 #include "moth_ui/layout/layout_entity_text.h"
 #include "moth_ui/layout/layout_rect.h"
 #include "moth_ui/animation/animation_clip.h"
 #include "moth_ui/animation/animation_marker.h"
 #include "moth_ui/graphics/text_alignment.h"
+#include "moth_ui/nodes/group.h"
+#include "moth_ui/flow/iclickable.h"
+#include "moth_ui/widgets/widget.h"
+#include "mock_context.h"
 #include <catch2/catch_all.hpp>
 #include <nlohmann/json.hpp>
 
@@ -91,6 +97,143 @@ TEST_CASE("Layout::Load sets the loaded path", "[layout][load]") {
 }
 
 // ---- child entity round-trips -----------------------------------------------
+
+// ---- sub-layout references --------------------------------------------------
+
+namespace {
+    // Hands back layouts it was given, so a reference resolves with no file on
+    // disk. That is the whole point of ILayoutProvider: a consumer that keeps its
+    // layouts in an asset database has no directory to resolve against.
+    class MapProvider : public ILayoutProvider {
+    public:
+        std::shared_ptr<Layout> GetLayout(AssetId const& id) override {
+            asked.push_back(id.str());
+            auto const found = layouts.find(id.str());
+            return found == layouts.end() ? nullptr : found->second;
+        }
+
+        std::map<std::string, std::shared_ptr<Layout>> layouts;
+        std::vector<std::string> asked;
+    };
+
+    // A layout whose root is a button, which is what a referenced widget is.
+    std::shared_ptr<Layout> makeButtonLayout() {
+        auto button = std::make_shared<Layout>();
+        button->m_class = "button";
+        return button;
+    }
+
+    // A menu that names one referenced layout by identity, under one node id.
+    nlohmann::json makeMenuJson(std::string_view refId, std::string_view identity) {
+        return nlohmann::json::parse(std::string{ R"({"type":"Layout","mothui_version":1,)" } +
+                                     R"("class":"","children":[{"type":"Ref","id":")" +
+                                     std::string{ refId } + R"(","layoutPath":")" +
+                                     std::string{ identity } + R"("}]})");
+    }
+}
+
+TEST_CASE("A ref resolves through a provider rather than the filesystem",
+          "[layout][serialization][ref]") {
+    MapProvider provider;
+    provider.layouts["7f3c-button"] = makeButtonLayout();
+
+    LayoutEntity::SerializeContext context;
+    context.m_version = Layout::Version;
+    context.m_layoutProvider = &provider;
+
+    auto menu = std::make_shared<Layout>();
+    REQUIRE(menu->Deserialize(makeMenuJson("play", "7f3c-button"), context));
+
+    REQUIRE(provider.asked.size() == 1);
+    REQUIRE(provider.asked.front() == "7f3c-button");
+
+    REQUIRE(menu->m_children.size() == 1);
+    REQUIRE(menu->m_children[0]->m_id == "play");
+    REQUIRE(menu->m_children[0]->m_class == "button");
+}
+
+TEST_CASE("An identity a provider does not hold fails the ref", "[layout][serialization][ref]") {
+    MapProvider provider;
+
+    LayoutEntity::SerializeContext context;
+    context.m_version = Layout::Version;
+    context.m_layoutProvider = &provider;
+
+    auto menu = std::make_shared<Layout>();
+    // The root still reads. A child that will not load is dropped rather than
+    // failing the whole layout, which is what LoadEntity has always done.
+    REQUIRE(menu->Deserialize(makeMenuJson("play", "not-in-the-database"), context));
+    REQUIRE(menu->m_children.empty());
+}
+
+TEST_CASE("A ref resolved by a provider instantiates as its widget",
+          "[layout][serialization][ref]") {
+    EnsureWidgetsRegistered();
+
+    MapProvider provider;
+    provider.layouts["7f3c-button"] = makeButtonLayout();
+
+    LayoutEntity::SerializeContext context;
+    context.m_version = Layout::Version;
+    context.m_layoutProvider = &provider;
+
+    auto menu = std::make_shared<Layout>();
+    REQUIRE(menu->Deserialize(makeMenuJson("play", "7f3c-button"), context));
+
+    MockContext mc;
+    auto const root = menu->Instantiate(mc.context);
+    REQUIRE(root != nullptr);
+
+    auto const node = root->FindChild("play");
+    REQUIRE(node != nullptr);
+    REQUIRE(dynamic_cast<IClickable*>(node.get()) != nullptr);
+}
+
+TEST_CASE("An identity survives a round trip unchanged", "[layout][serialization][ref]") {
+    MapProvider provider;
+    provider.layouts["7f3c-button"] = makeButtonLayout();
+
+    LayoutEntity::SerializeContext context;
+    context.m_version = Layout::Version;
+    context.m_layoutProvider = &provider;
+
+    // A root that is not empty, so relative() would really rewrite the identity.
+    // With an empty root it hands the string back unchanged and this proves
+    // nothing at all.
+    context.m_rootPath = "/projects/menus";
+
+    auto menu = std::make_shared<Layout>();
+    REQUIRE(menu->Deserialize(makeMenuJson("play", "7f3c-button"), context));
+    REQUIRE(menu->m_children.size() == 1);
+
+    // Not made relative to anything. A relative() of an identity would rewrite it
+    // into nonsense, which is why only an absolute path takes that branch.
+    auto const written = menu->Serialize(context);
+    REQUIRE(written["children"][0]["layoutPath"] == "7f3c-button");
+}
+
+TEST_CASE("With no provider a ref still reads a file", "[layout][serialization][ref]") {
+    // The path route is what every consumer uses today and it must not move.
+    auto const dir = std::filesystem::temp_directory_path() / "moth_ref_file";
+    std::filesystem::create_directories(dir);
+    { std::ofstream f(dir / "button.mothui");
+      f << R"({"type":"Layout","mothui_version":1,"class":"button","children":[]})"; }
+    { std::ofstream f(dir / "menu.mothui");
+      f << makeMenuJson("play", "button.mothui").dump(); }
+
+    auto [menu, result] = Layout::Load(dir / "menu.mothui");
+    REQUIRE(result == Layout::LoadResult::Success);
+    REQUIRE(menu->m_children.size() == 1);
+    REQUIRE(menu->m_children[0]->m_id == "play");
+    REQUIRE(menu->m_children[0]->m_class == "button");
+
+    auto const ref = std::dynamic_pointer_cast<LayoutEntityRef>(menu->m_children[0]);
+    REQUIRE(ref != nullptr);
+    REQUIRE(ref->m_layoutId.str() == "button.mothui");
+
+    std::filesystem::remove_all(dir);
+}
+
 
 TEST_CASE("Layout with LayoutEntityRect child round-trips", "[layout][serialization]") {
     TempFile tmp("moth_rect.mothui");
