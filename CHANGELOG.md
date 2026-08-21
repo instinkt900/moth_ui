@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 Entries are generated automatically from git history using [git-cliff](https://github.com/orhun/git-cliff).
 
+## [1.9.0] - 2026-08-21
+### Features
+- A sub-layout reference resolves through a provider
+
+### Changes
+- Bump version from 1.8.0 to 1.9.0
+
 ## [1.8.0] - 2026-08-20
 ### Features
 - [**breaking**] A layout names an image by an identity, not by a path
