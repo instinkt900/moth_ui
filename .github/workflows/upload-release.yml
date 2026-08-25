@@ -83,6 +83,7 @@ jobs:
         cache_packages: true
 
     - name: Build package and upload (develop)
+      shell: bash
       if: needs.check-version.outputs.changed != 'true'
       run: |
         conan remote add artifactory ${{ vars.ARTIFACTORY_URL }} --force
@@ -96,6 +97,7 @@ jobs:
         conan upload "moth_ui/develop:*" --confirm --remote artifactory
 
     - name: Build package and upload (release)
+      shell: bash
       if: needs.check-version.outputs.changed == 'true'
       run: |
         conan remote add artifactory ${{ vars.ARTIFACTORY_URL }} --force
