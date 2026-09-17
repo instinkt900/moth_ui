@@ -1,5 +1,10 @@
 # Moth UI
 
+> [!IMPORTANT]
+> **This repository is archived.** moth_ui now lives in [moth_toolkit](https://github.com/instinkt900/moth_toolkit) as the
+> [`moth::ui` module](https://github.com/instinkt900/moth_toolkit/tree/main/modules/ui). It is still published as the
+> `moth_ui` Conan package (2.x and later). New work, issues and releases happen there.
+
 [![Build Status](https://github.com/instinkt900/moth_ui/actions/workflows/build-test.yml/badge.svg)](https://github.com/instinkt900/moth_ui/actions/workflows/build-test.yml)
 [![Upload Status](https://github.com/instinkt900/moth_ui/actions/workflows/upload-release.yml/badge.svg)](https://github.com/instinkt900/moth_ui/actions/workflows/upload-release.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
